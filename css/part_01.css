@@ -1,4 +1,4 @@
-/* shiki dusk v0.2.0 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
+/* shiki dusk v0.2.1 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
 /* ===== tokens/palette =====
    палитра темы: исходные цвета (rgb-тройки без rgb()) и родные переменные шикимори.
    свои цвета задаются в site.css внутри той же обёртки @media … { html:root { … } },
@@ -1597,11 +1597,64 @@
     }
 }
 
+/* новости сайта и теги разделов */
+@media screen and (min-width: 1px) {
+    /* названия новостей — тем же цветом, что названия аниме в карточках */
+    .p-dashboards-show .v2 .db-update .name,
+    .b-topic.b-news_wall-topic > .inner .name-date .name,
+    .b-news_wall-topic .title,
+    .b-news_wall-topic .title a {
+        color: rgb(var(--accent-2)) !important;
+        transition: color var(--ease-fast);
+    }
+
+    /* теги «аниме / манга / ранобэ»: тёмные чипы, у каждого раздела свой оттенок */
+    .p-dashboards-show .v2 .fc-user-sections .tag-link {
+        --tag-hue: var(--accent-2);
+        background: rgba(var(--tag-hue), .12) !important;
+        color: color-mix(in srgb, rgb(var(--tag-hue)) 75%, rgb(var(--text))) !important;
+        border: 1px solid rgba(var(--tag-hue), .3) !important;
+        box-shadow: none !important;
+        transition: background-color var(--ease-fast), color var(--ease-fast), border-color var(--ease-fast);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link.anime-tag {
+        --tag-hue: var(--red);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link.manga-tag {
+        --tag-hue: var(--cyan);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link.ranobe-tag {
+        --tag-hue: var(--green);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link:active {
+        background: rgba(var(--tag-hue), .24) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
     .p-dashboards-show .b-link_button:hover,
     .p-dashboards-show .b-tag:hover {
         background: var(--chip-bg-hover) !important;
         color: var(--chip-text-hover) !important;
+    }
+
+    .p-dashboards-show .v2 .db-update .name:hover,
+    .p-dashboards-show .v2 .db-update a:hover .name,
+    .b-topic.b-news_wall-topic > .inner .name-date .name:hover,
+    .b-topic.b-news_wall-topic > .inner > a:hover .name-date .name,
+    .b-news_wall-topic .title a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link:hover {
+        background: rgba(var(--tag-hue), .24) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--tag-hue), .5) !important;
     }
 }
 
@@ -1626,6 +1679,76 @@
     .p-mangas-index .l-menu .disabled,
     .p-ranobe-index .l-menu .disabled {
         color: rgb(var(--text-4)) !important;
+    }
+
+    /* списки фильтров и сортировки: выбранный пункт — тёмная подсветка вместо белой */
+    .b-block_list li {
+        color: rgb(var(--text-2));
+        border-radius: var(--plate-radius);
+        transition: background-color var(--ease-fast), color var(--ease-fast);
+    }
+
+    .b-block_list li a {
+        color: rgb(var(--text-2));
+    }
+
+    .b-block_list li.selected {
+        background: var(--row-active) !important;
+        color: rgb(var(--lilac)) !important;
+        box-shadow: var(--row-mark) !important;
+    }
+
+    .b-block_list li:active {
+        background: var(--row-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    /* выпадающие поля фильтров (страна, жанры…) */
+    .c-ms-control:not(#u),
+    .c-ms-field {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    .c-ms-control:not(#u):focus,
+    .c-ms-control:not(#u)[aria-expanded="true"] {
+        border-color: var(--field-focus) !important;
+        box-shadow: var(--field-focus-glow) !important;
+    }
+
+    .c-ms-placeholder,
+    .c-ms-caret {
+        color: var(--field-placeholder) !important;
+    }
+
+    .c-ms-chip {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--chip-border) !important;
+    }
+
+    .c-ms-dropdown {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .c-ms-search {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    .c-ms-option:not(#u) {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .c-ms-option.is-on:not(#u) {
+        background: var(--row-active) !important;
+        color: rgb(var(--lilac)) !important;
     }
 
     /* сезон и период */
@@ -1740,6 +1863,20 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+    .b-block_list li:hover {
+        background: var(--row-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .c-ms-option:not(#u):hover {
+        background: var(--row-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .c-ms-control:not(#u):hover {
+        border-color: rgba(var(--accent-2), .36) !important;
+    }
+
     .season-selector-box .year-dropdown:hover .year-dropdown_trigger,
     .season-selector-box .season-selector_season:hover {
         background: color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--surface))) !important;
@@ -1903,7 +2040,7 @@
 @media screen and (min-width: 1px) {
     :root {
         --theme-name: "shiki dusk";
-        --theme-version: "0.2.0";
+        --theme-version: "0.2.1";
     }
 
     .l-footer {

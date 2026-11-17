@@ -95,10 +95,63 @@
     }
 }
 
+/* новости сайта и теги разделов */
+@media screen and (min-width: 1px) {
+    /* названия новостей — тем же цветом, что названия аниме в карточках */
+    .p-dashboards-show .v2 .db-update .name,
+    .b-topic.b-news_wall-topic > .inner .name-date .name,
+    .b-news_wall-topic .title,
+    .b-news_wall-topic .title a {
+        color: rgb(var(--accent-2)) !important;
+        transition: color var(--ease-fast);
+    }
+
+    /* теги «аниме / манга / ранобэ»: тёмные чипы, у каждого раздела свой оттенок */
+    .p-dashboards-show .v2 .fc-user-sections .tag-link {
+        --tag-hue: var(--accent-2);
+        background: rgba(var(--tag-hue), .12) !important;
+        color: color-mix(in srgb, rgb(var(--tag-hue)) 75%, rgb(var(--text))) !important;
+        border: 1px solid rgba(var(--tag-hue), .3) !important;
+        box-shadow: none !important;
+        transition: background-color var(--ease-fast), color var(--ease-fast), border-color var(--ease-fast);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link.anime-tag {
+        --tag-hue: var(--red);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link.manga-tag {
+        --tag-hue: var(--cyan);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link.ranobe-tag {
+        --tag-hue: var(--green);
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link:active {
+        background: rgba(var(--tag-hue), .24) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
     .p-dashboards-show .b-link_button:hover,
     .p-dashboards-show .b-tag:hover {
         background: var(--chip-bg-hover) !important;
         color: var(--chip-text-hover) !important;
+    }
+
+    .p-dashboards-show .v2 .db-update .name:hover,
+    .p-dashboards-show .v2 .db-update a:hover .name,
+    .b-topic.b-news_wall-topic > .inner .name-date .name:hover,
+    .b-topic.b-news_wall-topic > .inner > a:hover .name-date .name,
+    .b-news_wall-topic .title a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .p-dashboards-show .v2 .fc-user-sections .tag-link:hover {
+        background: rgba(var(--tag-hue), .24) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--tag-hue), .5) !important;
     }
 }
