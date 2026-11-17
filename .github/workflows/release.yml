@@ -60,14 +60,19 @@ jobs:
         run: |
           TAG="${GITHUB_REF_NAME}"
           {
+            # заголовок тега (если это не просто имя тега) + текст тега; пусто — строка из истории
+            subject="" body=""
             if [ "$(git cat-file -t "$TAG")" = tag ]; then
-              git tag -l --format='%(contents:body)' "$TAG" | sed '/^-----BEGIN PGP/,$d'
-              git tag -l --format='%(contents:subject)' "$TAG" | head -1 > /tmp/subject
+              subject=$(git tag -l --format='%(contents:subject)' "$TAG" | head -1)
+              body=$(git tag -l --format='%(contents:body)' "$TAG" | sed '/^-----BEGIN PGP/,$d')
+              [ "$subject" = "$TAG" ] && subject=""
             fi
-            if [ ! -s /tmp/subject ] || [ "$(cat /tmp/subject)" = "$TAG" ]; then
-              grep -E "^\| $TAG \|" docs/ARCHITECTURE.md | head -1 | sed -E 's/^\| [^|]+\| (.*) \|$/\1/'
+            if [ -n "$subject$body" ]; then
+              [ -n "$subject" ] && echo "$subject"
+              [ -n "$subject" ] && [ -n "$body" ] && echo
+              [ -n "$body" ] && echo "$body"
             else
-              cat /tmp/subject
+              grep -E "^\| $TAG \|" docs/ARCHITECTURE.md | head -1 | sed -E 's/^\| [^|]+\| (.*) \|$/\1/'
             fi
             echo
             echo "## установка"
