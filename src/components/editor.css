@@ -1,0 +1,103 @@
+/* ===== components/editor =====
+   редактор, спойлеры, цитаты, код, загрузка картинок */
+
+@media screen and (min-width: 1px) {
+    .b-shiki_editor,
+    .b-shiki_editor .controls,
+    .b-shiki_editor .links,
+    .b-shiki_editor .images,
+    .b-shiki_editor .quotes,
+    .b-shiki_editor .upload {
+        color: rgb(var(--text-2));
+    }
+
+    .b-shiki_editor .body .editor textarea,
+    .b-shiki_editor .body .editor .prose-mirror,
+    .b-shiki_editor textarea,
+    .ProseMirror {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: rgba(var(--line-tint), .2) !important;
+    }
+
+    .b-shiki_editor .body .preview {
+        background: rgb(var(--panel)) !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-shiki_editor .controls a,
+    .b-shiki_editor .controls span,
+    .editor-controls > span {
+        color: color-mix(in srgb, rgb(var(--lilac)) 80%, rgb(var(--text-2))) !important;
+        transition: color var(--ease-fast);
+    }
+
+    .b-shiki_editor .link-value {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-shiki_editor footer {
+        color: rgb(var(--text-3));
+    }
+
+    /* спойлеры */
+    .b-spoiler,
+    .b-spoiler_block,
+    .b-spoiler_inline {
+        color: rgb(var(--text-2));
+    }
+
+    .b-spoiler label,
+    .b-spoiler_block > label {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-spoiler .content,
+    .b-spoiler_block .content {
+        background: rgba(var(--accent), .06) !important;
+        border-color: rgba(var(--accent-2), .23) !important;
+    }
+
+    /* цитаты и код */
+    .b-quote,
+    .b-quote-v2,
+    blockquote {
+        background: rgba(var(--accent), .07) !important;
+        color: var(--text-mid) !important;
+        border-color: rgba(var(--accent-2), .35) !important;
+    }
+
+    .b-code-v2,
+    pre,
+    code {
+        background: rgb(var(--deep)) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 80%, rgb(var(--text-2))) !important;
+        border-color: var(--line) !important;
+    }
+
+    /* галерея и загрузка */
+    .b-gallery,
+    .b-image,
+    .b-dropzone {
+        color: rgb(var(--text-2));
+    }
+
+    .b-dropzone {
+        background: rgba(var(--accent), .05) !important;
+        border-color: rgba(var(--accent-2), .28) !important;
+    }
+
+    .b-upload_progress {
+        background: var(--plate-bg) !important;
+        border-color: var(--line) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-shiki_editor .controls a:hover,
+    .editor-controls > span:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}

@@ -1,0 +1,63 @@
+/* ===== components/buttons =====
+   кнопки сайта и чипы «показать ещё» */
+
+@media screen and (min-width: 1px) {
+    .b-button,
+    .b-link_button,
+    button,
+    input[type="submit"],
+    input[type="button"],
+    .button {
+        background: var(--btn-bg) !important;
+        color: var(--btn-text) !important;
+        border: 1px solid var(--btn-border) !important;
+        box-shadow: none;
+        transition: background-color var(--ease-fast), border-color var(--ease-fast), color var(--ease-fast);
+    }
+
+    .b-button:active,
+    .b-link_button:active,
+    button:active,
+    input[type="submit"]:active,
+    input[type="button"]:active {
+        background: var(--btn-bg-active) !important;
+        color: var(--btn-text-hover) !important;
+    }
+
+    .b-comments .comments-loader,
+    .b-comments .comments-hider,
+    .b-comments .comments-collapser,
+    .b-show_more,
+    .b-show_more-more {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-comments .comments-loader:active,
+    .b-show_more:active,
+    .b-show_more-more:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-button:hover,
+    .b-link_button:hover,
+    button:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    .button:hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+        border-color: var(--btn-border-hover) !important;
+    }
+
+    .b-comments .comments-loader:hover,
+    .b-show_more:hover,
+    .b-show_more-more:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}

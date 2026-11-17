@@ -1,0 +1,64 @@
+/* ===== components/forms =====
+   поля ввода, галочки, подписи форм, ошибки */
+
+@media screen and (min-width: 1px) {
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="url"],
+    textarea,
+    select,
+    .b-input input,
+    .b-input textarea {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus,
+    .b-input input:focus,
+    .b-input textarea:focus {
+        border-color: var(--field-focus) !important;
+        box-shadow: var(--field-focus-glow);
+        outline: none !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: var(--field-placeholder) !important;
+    }
+
+    select option {
+        background: var(--plate-bg);
+        color: rgb(var(--text));
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        accent-color: rgb(var(--accent));
+    }
+
+    .b-checkbox label,
+    .b-radio label,
+    .b-form label,
+    .b-form .variants,
+    .b-form .actions,
+    .b-input,
+    .b-input .hint {
+        color: rgb(var(--text-2));
+    }
+
+    .b-errors,
+    .b-errors .subheadline {
+        color: color-mix(in srgb, rgb(var(--red)) 55%, white) !important;
+    }
+
+    .b-errors {
+        background: rgba(var(--red), .1) !important;
+        border-color: rgba(var(--red), .32) !important;
+    }
+}

@@ -1,0 +1,41 @@
+/* ===== components/users =====
+   пользователи, клубы, коллекции, фильтры коллекций */
+
+@media screen and (min-width: 1px) {
+    .b-collection-topic,
+    .b-club,
+    .b-user,
+    .b-user.detailed,
+    .b-user.named_avatar {
+        color: rgb(var(--text-2));
+    }
+
+    .b-club .name,
+    .b-user .name,
+    .b-user.detailed .info .image-name,
+    .b-user.named_avatar .name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-club .info,
+    .b-user.detailed .history,
+    .b-user_history-line {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-collection_search .field input {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-collection-filters .block,
+    .b-header_filters {
+        color: rgb(var(--text-2));
+    }
+
+    .b-header_filters .filter-line,
+    .b-collection-filters .block > .filter {
+        border-color: var(--line) !important;
+    }
+}

@@ -1,0 +1,70 @@
+/* ===== layout/page =====
+   фон страницы (сумеречное небо или свои обои), колонка .l-page */
+
+@media screen and (min-width: 1px) {
+    /* фон — на html, body прозрачный: иначе фон body закрывает body::before с отрицательным z-index */
+    html {
+        background: rgb(var(--bg)) !important;
+    }
+
+    body {
+        position: relative;
+        background: transparent !important;
+        color: rgb(var(--text)) !important;
+    }
+
+    /* небо: затемнение обоев → обои (если заданы) → сумеречные пятна света */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        pointer-events: none;
+        background:
+            linear-gradient(rgba(var(--bg), var(--bg-dim)), rgba(var(--bg), var(--bg-dim))),
+            var(--bg-image) center / cover no-repeat,
+            radial-gradient(circle at 72% 24%, rgba(var(--lilac), .12), transparent 25%),
+            radial-gradient(circle at 35% 34%, rgba(var(--cyan), .08), transparent 22%),
+            radial-gradient(circle at 64% 78%, rgba(var(--accent-2), .07), transparent 24%),
+            radial-gradient(circle at 81% 10%, rgba(var(--warm), .08), transparent 9%),
+            linear-gradient(120deg,
+                color-mix(in srgb, rgb(var(--accent)) 8%, rgb(var(--bg))),
+                color-mix(in srgb, rgb(var(--cyan)) 5%, rgb(var(--bg))) 55%,
+                rgb(var(--bg)));
+    }
+
+    /* виньетка */
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -9;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 42%, rgba(var(--shade), .48));
+    }
+
+    .l-page {
+        background: linear-gradient(180deg, rgba(var(--page), .97), rgba(var(--bg), .985)) !important;
+        color: rgb(var(--text));
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        box-shadow: 0 0 70px rgba(var(--shade), .72);
+    }
+
+    .l-content,
+    .l-menu,
+    .block,
+    .b-block {
+        color: rgb(var(--text));
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 767px) {
+    .l-page {
+        border-left: 0;
+        border-right: 0;
+        box-shadow: none;
+    }
+}

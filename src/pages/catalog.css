@@ -1,0 +1,158 @@
+/* ===== pages/catalog =====
+   каталог аниме / манги / ранобэ: фильтры слева, выбор сезона и периода */
+
+@media screen and (min-width: 1px) {
+    .p-animes-index .l-menu,
+    .p-mangas-index .l-menu,
+    .p-ranobe-index .l-menu,
+    .p-recommendations-index .l-menu {
+        color: rgb(var(--text-2));
+    }
+
+    .p-animes-index .l-menu label,
+    .p-mangas-index .l-menu label,
+    .p-ranobe-index .l-menu label {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .p-animes-index .l-menu .disabled,
+    .p-mangas-index .l-menu .disabled,
+    .p-ranobe-index .l-menu .disabled {
+        color: rgb(var(--text-4)) !important;
+    }
+
+    /* сезон и период */
+    .season-selector-box {
+        position: relative;
+        padding: 10px 8px 8px !important;
+        background: linear-gradient(180deg, rgba(var(--panel-2), .96), rgba(var(--page), .98)) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: var(--plate-radius) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .018), 0 5px 15px rgba(var(--shade), .22) !important;
+    }
+
+    .season-selector-box .season-selector {
+        padding-bottom: 8px !important;
+        margin-bottom: 8px !important;
+        border-bottom: 1px solid rgba(var(--line-tint), .08) !important;
+    }
+
+    .season-selector-box .range-selector {
+        padding-top: 0 !important;
+    }
+
+    .season-selector-box .range-selector_label {
+        color: color-mix(in srgb, rgb(var(--text-3)) 80%, rgb(var(--text-2))) !important;
+        font-size: 12px !important;
+        text-shadow: none !important;
+    }
+
+    .season-selector-box .year-dropdown_trigger,
+    .season-selector-box .season-selector_season {
+        box-sizing: border-box !important;
+        background: linear-gradient(180deg, rgb(var(--surface)), rgb(var(--field))) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--text-2))) !important;
+        border: 1px solid rgba(var(--line-tint), .2) !important;
+        border-radius: 3px !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .018) !important;
+    }
+
+    .season-selector-box .year-dropdown_trigger *,
+    .season-selector-box .year-dropdown_trigger::before {
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--text-2))) !important;
+    }
+
+    .season-selector-box .year-dropdown_trigger::after {
+        border-top-color: rgb(var(--text-3)) !important;
+    }
+
+    .season-selector-box .season-selector_season:focus-visible,
+    .season-selector-box .year-dropdown_trigger:focus-visible {
+        outline: 2px solid rgb(var(--cyan)) !important;
+        outline-offset: 2px;
+    }
+
+    .season-selector-box .season-selector_season option {
+        background: var(--plate-bg);
+        color: rgb(var(--text));
+    }
+
+    .season-selector-box .year-dropdown_list {
+        background: var(--plate-bg) !important;
+        color: var(--text-mid) !important;
+        border: 1px solid var(--line-2) !important;
+        border-radius: 3px !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .season-selector-box .year-dropdown_list li {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .season-selector-box .year-dropdown_list li.selected,
+    .season-selector-box .year-dropdown_list li.active {
+        background: var(--row-active) !important;
+        color: rgb(var(--lilac)) !important;
+        box-shadow: var(--row-mark) !important;
+    }
+
+    .season-selector-box .season-selector_add,
+    .season-selector-box .range-selector_apply {
+        background: var(--btn-bg) !important;
+        color: var(--btn-text) !important;
+        border: 1px solid var(--btn-border) !important;
+        border-radius: 3px !important;
+        text-decoration: none !important;
+        box-shadow: none !important;
+    }
+
+    .season-selector-box .season-selector_reset,
+    .season-selector-box .range-selector_reset {
+        color: rgb(var(--text-3)) !important;
+        text-decoration: none !important;
+    }
+
+    /* у компонента два варианта классов подсказки — в разных версиях сайта */
+    .season-selector-box .range-selector-box_hint,
+    .season-selector-box .range-selector_box_hint {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-3)) !important;
+        border: 1px solid var(--line) !important;
+        box-shadow: none !important;
+    }
+
+    .season-selector-box .range-selector-box_hint_popup,
+    .season-selector-box .range-selector_box_hint_popup {
+        background: var(--plate-bg) !important;
+        color: var(--text-mid) !important;
+        border: 1px solid var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .season-selector-box .year-dropdown:hover .year-dropdown_trigger,
+    .season-selector-box .season-selector_season:hover {
+        background: color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--surface))) !important;
+        border-color: rgba(var(--accent-2), .36) !important;
+    }
+
+    .season-selector-box .year-dropdown_list li:hover {
+        background: var(--row-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .season-selector-box .season-selector_add:hover,
+    .season-selector-box .range-selector_apply:hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+        border-color: var(--btn-border-hover) !important;
+    }
+
+    .season-selector-box .season-selector_reset:hover,
+    .season-selector-box .range-selector_reset:hover {
+        color: rgb(var(--link)) !important;
+    }
+}

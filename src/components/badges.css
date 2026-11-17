@@ -1,0 +1,49 @@
+/* ===== components/badges =====
+   теги, метки статуса, маркеры «новое», «оффтоп», «спойлер» */
+
+@media screen and (min-width: 1px) {
+    .b-tag,
+    .b-entry-info .line .b-tag,
+    .b-catalog_entry-tooltip .tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+        transition: background-color var(--ease-fast), color var(--ease-fast), border-color var(--ease-fast);
+    }
+
+    .b-tag:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+
+    .b-anime_status_tag,
+    .b-badge,
+    .b-new_marker,
+    .b-summary_marker,
+    .b-offtopic_marker,
+    .b-broadcast_marker,
+    .b-spoiler_marker {
+        filter: saturate(.78) brightness(.92);
+    }
+
+    .b-new_marker {
+        color: rgb(var(--cyan-2)) !important;
+    }
+
+    .b-offtopic_marker {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-spoiler_marker {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-tag:hover,
+    .b-entry-info .line .b-tag:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+        border-color: var(--chip-border-hover) !important;
+    }
+}

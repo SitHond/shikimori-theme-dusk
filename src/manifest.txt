@@ -1,0 +1,27 @@
+# порядок подключения модулей: сверху вниз = порядок каскада
+tokens/palette.css
+tokens/components.css
+base/base.css
+layout/page.css
+layout/header.css
+components/headings.css
+components/buttons.css
+components/forms.css
+components/modals.css
+components/badges.css
+components/cards.css
+components/stats.css
+components/users.css
+components/comments.css
+components/editor.css
+components/pagination.css
+pages/anime.css
+pages/forum.css
+pages/profile.css
+pages/dashboard.css
+pages/catalog.css
+pages/lists.css
+pages/achievements.css
+pages/moderation.css
+layout/footer.css
+overrides/late.css

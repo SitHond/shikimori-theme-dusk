@@ -1,0 +1,57 @@
+/* ===== components/modals =====
+   окна, всплывающие панели, подсказки, уведомления и предупреждения */
+
+@media screen and (min-width: 1px) {
+    .b-modal > .inner,
+    .popup,
+    .b-popup,
+    .dropdown,
+    .tooltip-inner,
+    .tipsy-inner {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text)) !important;
+        border-color: var(--plate-border) !important;
+        box-shadow: var(--plate-shadow);
+    }
+
+    .tipsy {
+        pointer-events: none;
+    }
+
+    .b-shade {
+        background: rgba(var(--bg), .72) !important;
+    }
+
+    .tooltip-inner .close {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    /* опросы, вопросы, уведомления */
+    .b-poll,
+    .b-question,
+    .b-notice,
+    .b-warning {
+        background: color-mix(in srgb, rgb(var(--accent)) 5%, rgb(var(--surface))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-warning {
+        border-left-color: rgb(var(--warm)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .tooltip-inner .close:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 1023px) {
+    .b-modal > .inner {
+        background: var(--plate-bg) !important;
+    }
+}

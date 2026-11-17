@@ -1,0 +1,80 @@
+/* ===== tokens/components =====
+   токены компонентов: общие значения рамок, панелей, кнопок, чипов, полей и строк списков.
+   всё считается из палитры (tokens/palette.css) — меняется в одном месте.
+   свои значения можно задать в site.css внутри html:root { … }. */
+
+@media screen and (min-width: 1px) {
+    html:root {
+        /* рамки и разделители */
+        --line-faint: rgba(var(--line-tint), .07);
+        --line-soft: rgba(var(--line-tint), .1);
+        --line: rgba(var(--line-tint), .14);
+        --line-2: rgba(var(--line-tint), .28);
+
+        /* промежуточный текст между основным и второстепенным */
+        --text-mid: color-mix(in srgb, rgb(var(--text)) 50%, rgb(var(--text-2)));
+
+        /* панели: окна, подсказки, выпадающие списки */
+        --plate-bg: rgb(var(--surface));
+        --plate-border: var(--line-2);
+        --plate-shadow: 0 14px 35px rgba(var(--shade), .6);
+        --drop-bg: rgb(var(--panel));
+        --drop-shadow: 0 12px 28px rgba(var(--shade), .6);
+        --plate-radius: 4px;
+
+        /* заголовки .headline / .midheadline / .subheadline */
+        --heading-bg: linear-gradient(90deg,
+            color-mix(in srgb, rgb(var(--accent)) 25%, rgb(var(--panel))),
+            rgb(var(--panel-2)) 58%,
+            rgb(var(--panel)));
+        --heading-text: rgb(var(--lilac));
+        --heading-mark: rgb(var(--lamp));
+        --heading-dot: rgb(var(--warm));
+
+        /* кнопки */
+        --btn-bg: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 25%, rgb(var(--panel))),
+            color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--panel))));
+        --btn-bg-hover: color-mix(in srgb, rgb(var(--accent)) 35%, rgb(var(--panel)));
+        --btn-bg-active: color-mix(in srgb, rgb(var(--accent)) 45%, rgb(var(--panel)));
+        --btn-text: color-mix(in srgb, rgb(var(--lilac)) 85%, rgb(var(--text-2)));
+        --btn-text-hover: rgb(var(--warm-2));
+        --btn-border: rgba(var(--line-tint), .22);
+        --btn-border-hover: rgba(var(--warm), .42);
+
+        /* чипы: теги, «показать ещё», мелкие кнопки */
+        --chip-bg: color-mix(in srgb, rgb(var(--accent)) 14%, rgb(var(--panel)));
+        --chip-bg-hover: color-mix(in srgb, rgb(var(--accent)) 24%, rgb(var(--panel)));
+        --chip-text: color-mix(in srgb, rgb(var(--accent-2)) 60%, rgb(var(--lilac)));
+        --chip-text-hover: rgb(var(--warm-2));
+        --chip-border: rgba(var(--line-tint), .16);
+        --chip-border-hover: rgba(var(--warm), .34);
+
+        /* поля ввода */
+        --field-bg: rgb(var(--field));
+        --field-text: rgb(var(--text));
+        --field-border: rgba(var(--line-tint), .19);
+        --field-focus: rgba(var(--cyan), .42);
+        --field-focus-glow: 0 0 7px rgba(var(--cyan), .08);
+        --field-placeholder: rgb(var(--text-4));
+
+        /* строки списков: меню, поиск, выпадающие списки */
+        --row-hover: rgba(var(--accent), .22);
+        --row-active: rgba(var(--accent), .3);
+        --row-mark: inset 2px 0 0 rgb(var(--accent-2));
+        --row-fade: linear-gradient(90deg, rgba(var(--accent), .24), rgba(var(--accent), .04), transparent);
+
+        /* шкалы */
+        --bar-1: linear-gradient(90deg,
+            color-mix(in srgb, rgb(var(--accent)) 80%, black),
+            color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--accent-2))),
+            rgb(var(--accent-2)));
+        --bar-2: linear-gradient(90deg,
+            color-mix(in srgb, rgb(var(--cyan)) 50%, black),
+            color-mix(in srgb, rgb(var(--cyan)) 80%, black),
+            rgb(var(--cyan-2)));
+
+        /* анимации наведения */
+        --ease-fast: .15s ease;
+    }
+}

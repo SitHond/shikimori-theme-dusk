@@ -1,0 +1,61 @@
+/* ===== components/cards =====
+   карточки каталога .b-catalog_entry, постеры, подсказка карточки */
+
+@media screen and (min-width: 1px) {
+    .b-catalog_entry {
+        color: rgb(var(--text));
+    }
+
+    .b-catalog_entry .cover {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-catalog_entry .cover .title,
+    .b-catalog_entry .cover .title a {
+        color: rgb(var(--accent-2)) !important;
+        transition: color var(--ease-fast);
+    }
+
+    .b-catalog_entry .cover .misc,
+    .b-catalog_entry .cover .misc span {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-catalog_entry .cover .misc span.relation {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-catalog_entry .image-decor,
+    .b-db_entry-poster,
+    .c-poster img,
+    .b-poster img {
+        border-color: var(--line-2) !important;
+        transition: box-shadow var(--ease-fast);
+    }
+
+    .b-catalog_entry-tooltip .inner {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--plate-border) !important;
+    }
+
+    .b-catalog_entry-tooltip .inner .line .key {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-catalog_entry-tooltip .inner .line .value {
+        color: rgb(var(--text)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-catalog_entry .cover:hover .title,
+    .b-catalog_entry .cover .title:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .b-catalog_entry .image-decor:hover,
+    .c-poster img:hover {
+        box-shadow: 0 0 14px rgba(var(--accent-2), .12);
+    }
+}

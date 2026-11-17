@@ -1,0 +1,38 @@
+/* ===== layout/footer =====
+   подвал и подпись «shiki dusk vX.Y.Z» (версия = тег релиза, ставит tools/build.py --version) */
+
+@media screen and (min-width: 1px) {
+    :root {
+        --theme-name: "shiki dusk";
+        --theme-version: "0.1.0";
+    }
+
+    .l-footer {
+        position: relative;
+        color: rgb(var(--text-3)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .l-footer a {
+        color: color-mix(in srgb, rgb(var(--link)) 75%, rgb(var(--text-3))) !important;
+    }
+
+    .l-footer::before {
+        content: var(--theme-name) " v" var(--theme-version);
+        position: absolute;
+        left: 5px;
+        bottom: 0;
+        z-index: 10;
+        white-space: pre;
+        color: rgba(var(--text-3), .6);
+        font-size: 10px;
+        font-weight: bold;
+        pointer-events: none;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .l-footer a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}

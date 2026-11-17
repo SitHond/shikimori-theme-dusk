@@ -1,0 +1,60 @@
+/* ===== components/stats =====
+   оценка (звёзды), блок «мой список» на странице тайтла, шкалы статистики */
+
+@media screen and (min-width: 1px) {
+    .b-rate {
+        color: rgb(var(--text-2));
+    }
+
+    .b-rate .stars,
+    .b-rate .stars.score,
+    .b-rate .stars.hover {
+        color: rgb(var(--stars)) !important;
+    }
+
+    .b-rate .score-value {
+        color: rgb(var(--text)) !important;
+    }
+
+    .b-rate .score-notice {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-user_rate {
+        color: rgb(var(--text-2));
+    }
+
+    .b-user_rate .rate-show,
+    .b-user_rate .rate-edit {
+        background: transparent !important;
+    }
+
+    .b-user_rate .rate-show .note,
+    .b-user_rate .rate-edit .note {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-stats_bar .title {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .b-stats_bar .bar {
+        background: rgb(var(--deep)) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    .b-stats_bar .bar .first {
+        background: var(--bar-1) !important;
+    }
+
+    .b-stats_bar .bar .second {
+        background: var(--bar-2) !important;
+    }
+
+    .b-stats_bar .stat_names,
+    .b-stats_bar .stat_names * {
+        color: rgb(var(--text-2)) !important;
+    }
+}

@@ -1,0 +1,109 @@
+/* ===== pages/forum =====
+   топики, форум, голосование, рецензии и отзывы */
+
+@media screen and (min-width: 1px) {
+    .b-topic,
+    .b-forum,
+    .b-forums .forum,
+    .b-topic-preview,
+    .b-topic-minified {
+        color: rgb(var(--text-2));
+        border-color: var(--line) !important;
+    }
+
+    .b-topic > .inner header .name-date a.name,
+    .b-topic-preview .name,
+    .b-forum .name,
+    .b-forums .forum .name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-topic .about,
+    .b-topic .about > span,
+    .b-forum .topics,
+    .b-forums .forum .topics {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-topic .footer-vote,
+    .b-footer_vote {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-topic .footer-vote .vote-group .vote,
+    .b-footer_vote .vote {
+        background: var(--chip-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    /* рецензии и отзывы */
+    .b-review-topic,
+    .b-critique-topic {
+        color: rgb(var(--text-2));
+        border-color: var(--line) !important;
+    }
+
+    .b-review-topic .name-date .name,
+    .b-review-topic .name-date .name a,
+    .b-critique-topic .name-date .name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-review-topic .body,
+    .b-review-topic .body *,
+    .b-critique-topic .body {
+        color: rgb(var(--text-2));
+    }
+
+    .b-review_votes,
+    .b-critique_votes {
+        color: rgb(var(--text-3));
+    }
+
+    .b-review_votes .votes-for,
+    .b-critique_votes .votes-for {
+        color: rgb(var(--green)) !important;
+    }
+
+    .b-review_votes .votes-against,
+    .b-critique_votes .votes-against {
+        color: rgb(var(--red)) !important;
+    }
+
+    .b-reviews_navigation .navigation-container {
+        color: rgb(var(--text-2));
+    }
+
+    .b-reviews_navigation .navigation-node {
+        background: color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))) !important;
+        color: var(--text-mid) !important;
+        border-color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--bg))) !important;
+    }
+
+    .b-reviews_navigation .navigation-node.is-active {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: rgb(var(--warm)) !important;
+    }
+
+    .b-reviews_navigation .navigation-node-positive {
+        border-color: color-mix(in srgb, rgb(var(--green)) 65%, rgb(var(--bg))) !important;
+    }
+
+    .b-reviews_navigation .navigation-node-neutral {
+        border-color: color-mix(in srgb, rgb(var(--cyan)) 55%, rgb(var(--bg))) !important;
+    }
+
+    .b-reviews_navigation .navigation-node-negative {
+        border-color: color-mix(in srgb, rgb(var(--red)) 60%, rgb(var(--bg))) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-reviews_navigation .navigation-node:hover {
+        background: color-mix(in srgb, rgb(var(--accent)) 14%, rgb(var(--surface))) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+}

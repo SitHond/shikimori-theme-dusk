@@ -1,0 +1,104 @@
+/* ===== pages/dashboard =====
+   главная: горячие темы, новости, «мой список», топ отзывов */
+
+@media screen and (min-width: 1px) {
+    .p-dashboards-show .b-hot_topics-v2,
+    .p-dashboards-show .b-forums,
+    .p-dashboards-show .b-news_line-topic,
+    .p-dashboards-show .b-news_wall-topic {
+        color: rgb(var(--text-2));
+    }
+
+    .p-dashboards-show .b-link_button,
+    .p-dashboards-show .b-tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--line) !important;
+    }
+
+    /* «мой список»: убрать светлую карточку сайта */
+    .p-dashboards-show .v2 .my-list {
+        background: linear-gradient(145deg, color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: rgba(var(--cyan), .24) !important;
+    }
+
+    .p-dashboards-show .v2 .my-list .label span,
+    .p-dashboards-show .v2 .my-list .entry .name,
+    .p-dashboards-show .v2 .my-list .entry .name a {
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--lilac))) !important;
+    }
+
+    .p-dashboards-show .v2 .my-list .entry,
+    .p-dashboards-show .v2 .my-list .entry .status,
+    .p-dashboards-show .v2 .my-list .entry .episodes,
+    .p-dashboards-show .v2 .my-list .entry .misc,
+    .p-dashboards-show .v2 .my-list .b-user_rate,
+    .p-dashboards-show .v2 .my-list .b-user_rate .rate-show,
+    .p-dashboards-show .v2 .my-list .b-user_rate .rate-edit,
+    .p-dashboards-show .v2 .my-list .b-user_rate .status,
+    .p-dashboards-show .v2 .my-list .b-user_rate .episodes,
+    .p-dashboards-show .v2 .my-list .b-nothing_here {
+        color: color-mix(in srgb, rgb(var(--text-2)) 60%, rgb(var(--text-3))) !important;
+    }
+
+    .p-dashboards-show .v2 .my-list .misc-links a {
+        color: color-mix(in srgb, rgb(var(--cyan)) 70%, rgb(var(--cyan-2))) !important;
+    }
+
+    /* топ отзывов: карточки остаются пастельными, поэтому текст в них тёмный (числами намеренно) */
+    .p-dashboards-show .review-slide,
+    .p-dashboards-show .review-slide .b-review-topic,
+    .p-dashboards-show .review-slide .b-review-topic .body,
+    .p-dashboards-show .review-slide .b-review-topic .body * {
+        color: #5b5365 !important;
+    }
+
+    .p-dashboards-show .review-slide .mini-review-author,
+    .p-dashboards-show .review-slide .about,
+    .p-dashboards-show .review-slide .about > span {
+        color: #514a59 !important;
+    }
+
+    .p-dashboards-show .review-slide .mini-review-eyebrow {
+        color: #756d7d !important;
+    }
+
+    .p-dashboards-show .review-slide .mini-review-title,
+    .p-dashboards-show .review-slide .b-review-topic .title,
+    .p-dashboards-show .review-slide .b-review-topic .title a,
+    .p-dashboards-show .review-slide .b-topic-preview .name {
+        color: #075f9b !important;
+    }
+
+    .p-dashboards-show .review-slide .b-review-topic .body a,
+    .p-dashboards-show .review-slide .b-review-topic .body .b-link {
+        color: #176a9d !important;
+    }
+
+    .p-dashboards-show .review-slide .b-height_shortener .expand,
+    .p-dashboards-show .review-slide .b-height_shortener .expand span {
+        color: #176a9d !important;
+        border-bottom-color: rgba(23, 106, 157, .32) !important;
+    }
+
+    .p-dashboards-show .review-slide.color-0 .b-height_shortener .shade {
+        background-image: linear-gradient(rgba(230, 244, 234, 0), #e6f4ea) !important;
+    }
+
+    .p-dashboards-show .review-slide.color-1 .b-height_shortener .shade {
+        background-image: linear-gradient(rgba(255, 248, 225, 0), #fff8e1) !important;
+    }
+
+    .p-dashboards-show .review-slide.color-2 .b-height_shortener .shade {
+        background-image: linear-gradient(rgba(255, 235, 238, 0), #ffebee) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .p-dashboards-show .b-link_button:hover,
+    .p-dashboards-show .b-tag:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}

@@ -1,0 +1,130 @@
+/* ===== overrides/late =====
+   правила, которые обязаны идти после всех модулей: добивка светлых остатков сайта
+   и контрастные правки живых компонентов shikimori.rip. у каждого — откуда оно. */
+
+@media screen and (min-width: 1px) {
+    /* из components/modals, layout/header, components/editor, pages/lists:
+       известные контейнеры, у которых сайт оставляет светлый фон */
+    .b-modal > .inner,
+    .ac_results,
+    .completable-block.menu-suggest,
+    .b-main_search ul.popup,
+    .l-top_menu-v2 .global-search .search-results,
+    .b-shiki_editor .body .editor textarea,
+    .b-shiki_editor .body .editor .prose-mirror,
+    .p-user_rates-index .list-lines tr.edit-form form {
+        background-color: rgb(var(--panel)) !important;
+    }
+
+    .b-modal > .inner,
+    .ac_results,
+    .completable-block.menu-suggest,
+    .b-main_search ul.popup,
+    .l-top_menu-v2 .global-search .search-results {
+        color: rgb(var(--text)) !important;
+    }
+
+    /* из layout/header: строки результатов поиска лежат внутри .inner,
+       общее правило для прямых потомков до их текста не достаёт */
+    .l-top_menu-v2 .global-search .search-results .search-mode,
+    .l-top_menu-v2 .global-search .search-results .nothing_found,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .info {
+        color: var(--text-mid) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .search-mode.active,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item.active {
+        color: rgb(var(--text-strong)) !important;
+        background: linear-gradient(90deg, rgba(var(--accent), .24), rgba(var(--accent), .05)) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .name,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .name .b-link {
+        color: color-mix(in srgb, rgb(var(--lilac)) 85%, white) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .line .key {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .line .value,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .b-separator {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results::before {
+        background: linear-gradient(0deg, rgba(var(--panel), 0), rgb(var(--panel))) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results::after {
+        background: linear-gradient(180deg, rgba(var(--panel), 0), rgb(var(--panel))) !important;
+    }
+
+    /* из base/base: заголовок топика и форума — сайт ставит цвет прямо на h1 */
+    .p-topics-show header.head h1,
+    .p-topics-show header.head h1 a,
+    .p-topics-show header.head h2,
+    .p-topics-show header.head h2 a,
+    .p-forums-show header.head h1,
+    .p-forums-show header.head h1 a {
+        color: color-mix(in srgb, rgb(var(--lilac)) 85%, rgb(var(--text-2))) !important;
+        text-shadow: 0 1px 2px rgba(var(--shade), .55);
+    }
+
+    /* из pages/moderation: карточки проектов (тело с заголовком, описанием и голосами) */
+    .body:has(> .title):has(> .description):has(> .votes) {
+        background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--accent)) 5%, rgb(var(--surface))), rgb(var(--page))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-top: 1px solid var(--line) !important;
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .title a {
+        color: color-mix(in srgb, rgb(var(--text)) 80%, rgb(var(--lilac))) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .description {
+        color: color-mix(in srgb, rgb(var(--text-2)) 50%, rgb(var(--text-3))) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .description a,
+    .body:has(> .title):has(> .description):has(> .votes) > .actions a {
+        color: rgb(var(--link)) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .votes .vote {
+        background: var(--btn-bg) !important;
+        color: var(--btn-text) !important;
+        border: 1px solid var(--btn-border) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .votes .vote:disabled {
+        background: rgb(var(--surface)) !important;
+        color: rgb(var(--text-3)) !important;
+        border-color: var(--line) !important;
+        opacity: .75 !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    /* из layout/header */
+    .l-top_menu-v2 .global-search .search-results .search-mode:hover,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item:hover {
+        color: rgb(var(--text-strong)) !important;
+        background: linear-gradient(90deg, rgba(var(--accent), .24), rgba(var(--accent), .05)) !important;
+    }
+
+    /* из pages/moderation */
+    .body:has(> .title):has(> .description):has(> .votes) > .votes .vote:not(:disabled):hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+        border-color: var(--btn-border-hover) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .title a:hover,
+    .body:has(> .title):has(> .description):has(> .votes) > .description a:hover,
+    .body:has(> .title):has(> .description):has(> .votes) > .actions a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}

@@ -1,0 +1,171 @@
+/* ===== pages/anime =====
+   страница аниме / манги / ранобэ: информация, кнопки «смотреть», видео, плеер и выбор источника */
+
+@media screen and (min-width: 1px) {
+    .b-db_entry {
+        color: rgb(var(--text));
+    }
+
+    .b-db_entry > .c-about,
+    .b-db_entry > .c-image {
+        color: rgb(var(--text-2));
+    }
+
+    .b-entry-info .line .key {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-entry-info .line .value,
+    .b-entry-info .line .value * {
+        color: rgb(var(--text-2));
+    }
+
+    .b-entry-info .line .value a {
+        color: rgb(var(--accent-2));
+    }
+
+    .p-animes-show .watch-online,
+    .p-animes-show .upload-video,
+    .p-mangas-show .watch-online,
+    .p-mangas-show .upload-video {
+        background: var(--btn-bg) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: 0 0 14px rgba(var(--cyan), .09);
+    }
+
+    /* видео и старый плеер */
+    .b-video .video-link {
+        background: rgb(var(--deep)) !important;
+    }
+
+    .b-video_player,
+    .b-video_player .player-area,
+    .p-anime_videos-index .c-videos {
+        background: rgb(var(--page)) !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-video_player .cc-player_controls {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 24%, rgb(var(--panel))),
+            rgb(var(--panel-2))) !important;
+        color: rgb(var(--text)) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-video_player .cc-player_controls .c-control,
+    .b-video_player .cc-player_controls .episode-title,
+    .b-video_player .cc-player_controls .episode-num {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-video_player .cc-player_controls .c-control.selected {
+        background: rgba(var(--accent), .18) !important;
+        color: #fff !important;
+    }
+
+    .b-video_player .cc-player_controls .c-control .icon {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-video_player .cc-player_controls .episode-num input {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-video_variant,
+    .p-anime_videos-index .c-videos .video-variant-switcher {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-video_variant.active,
+    .p-anime_videos-index .c-videos .video-variant-switcher.active {
+        background: rgba(var(--accent), .25) !important;
+        box-shadow: inset 3px 0 0 rgb(var(--cyan));
+    }
+
+    /* выбор источника в новом плеере */
+    .player-dropdown__list {
+        background: rgb(var(--field)) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid rgba(var(--line-tint), .2) !important;
+        border-radius: var(--plate-radius) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row {
+        background: var(--plate-bg) !important;
+        color: var(--text-mid) !important;
+        border-color: var(--line-faint) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row:nth-child(even) {
+        background: rgb(var(--field)) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row:is(.active, .selected, [aria-selected="true"]) {
+        background: var(--row-active) !important;
+        color: rgb(var(--lilac)) !important;
+        box-shadow: inset 3px 0 0 rgb(var(--accent-2)) !important;
+    }
+
+    .player-dropdown__cell {
+        color: rgb(var(--text-2)) !important;
+        border-color: rgba(var(--line-tint), .08) !important;
+    }
+
+    .player-dropdown__cell--name {
+        color: color-mix(in srgb, rgb(var(--text)) 80%, rgb(var(--text-2))) !important;
+    }
+
+    .player-dropdown__cell--episodes {
+        color: rgb(var(--link)) !important;
+    }
+
+    .player-dropdown__caret {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .player-dropdown__trigger {
+        background: linear-gradient(180deg, var(--chip-bg), var(--plate-bg)) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--text-2))) !important;
+        border: 1px solid rgba(var(--line-tint), .2) !important;
+        box-shadow: none !important;
+    }
+
+    .player-dropdown__trigger[aria-expanded="true"] {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--accent-2), .38) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-video_player .cc-player_controls .c-control:hover {
+        background: rgba(var(--accent), .18) !important;
+        color: #fff !important;
+    }
+
+    .b-video_variant:hover,
+    .p-anime_videos-index .c-videos .video-variant-switcher:hover {
+        background: rgba(var(--accent), .18) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row:hover {
+        background: rgba(var(--accent), .24) !important;
+    }
+
+    .player-dropdown__row:hover .player-dropdown__cell {
+        color: rgb(var(--text)) !important;
+    }
+
+    .player-dropdown__trigger:hover {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--accent-2), .38) !important;
+    }
+}

@@ -1,0 +1,39 @@
+/* ===== components/pagination =====
+   постраничная навигация и плавающие переключатели .b-options-floated */
+
+@media screen and (min-width: 1px) {
+    .b-pages,
+    .pagination {
+        color: rgb(var(--text-3));
+    }
+
+    .b-pages a,
+    .pagination a,
+    .pagination .link {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-pages .current,
+    .pagination .current,
+    .pagination .active {
+        color: #fff !important;
+    }
+
+    .b-options-floated a,
+    .b-options-floated span {
+        color: rgb(var(--text-2));
+    }
+
+    .b-options-floated a.selected {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-pages a:hover,
+    .pagination a:hover,
+    .pagination .link:hover,
+    .b-options-floated a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}

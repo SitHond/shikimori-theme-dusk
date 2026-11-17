@@ -1,0 +1,1815 @@
+/* ==========================================================================
+   SHIKIMORI RIP — PURPLE COZY DESK
+   Full-site custom theme
+   Built for Shikimori / Shikimori RIP structure
+   ========================================================================== */
+
+/* ==========================================================================
+   0. PALETTE + NATIVE SHIKIMORI VARIABLES
+   ========================================================================== */
+
+html {
+  --pd-bg: #090711;
+  --pd-bg-2: #0d0a17;
+  --pd-panel: #12101d;
+  --pd-panel-2: #181327;
+  --pd-panel-3: #211833;
+
+  --pd-purple: #8064d2;
+  --pd-purple-2: #a98cff;
+  --pd-lilac: #d8ceff;
+
+  --pd-cyan: #7bc9f2;
+  --pd-cyan-2: #a6e2ff;
+
+  --pd-warm: #ffb76a;
+  --pd-warm-2: #ffd6a3;
+
+  --pd-green: #78c98c;
+  --pd-red: #e36e7c;
+  --pd-yellow: #e3bf72;
+
+  --pd-text: #e2dcf0;
+  --pd-text-2: #bbb1cb;
+  --pd-muted: #8f869d;
+  --pd-faint: #676072;
+
+  --pd-line: rgba(184, 160, 255, .14);
+  --pd-line-2: rgba(184, 160, 255, .28);
+  --pd-shadow: rgba(0, 0, 0, .55);
+
+  /* Native Shikimori variables.
+     A lot of site components inherit these automatically. */
+  --icon-color: var(--pd-purple-2);
+  --link-color: #b9a7fa;
+  --link-hover-color: var(--pd-warm);
+  --link-active-color: #ffd8aa;
+
+  --link-border-color: rgba(185, 167, 250, .25);
+  --link-border-hover-color: rgba(255, 183, 106, .35);
+  --link-border-active-color: rgba(255, 216, 170, .40);
+
+  --headline-color: var(--pd-lilac);
+  --headline-background-color: #211832;
+  --headline-border-color: #a96b34;
+  --headline-arrow-color: var(--pd-warm);
+
+  color-scheme: dark;
+}
+
+
+/* ==========================================================================
+   1. PAGE / BACKGROUND
+   ========================================================================== */
+
+html,
+body {
+  background: var(--pd-bg) !important;
+  color: var(--pd-text) !important;
+}
+
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 72% 24%, rgba(199, 179, 255, .12), transparent 25%),
+    radial-gradient(circle at 35% 34%, rgba(123, 201, 242, .08), transparent 22%),
+    radial-gradient(circle at 64% 78%, rgba(166, 103, 230, .07), transparent 24%),
+    radial-gradient(circle at 81% 10%, rgba(255, 183, 106, .08), transparent 9%),
+    linear-gradient(120deg, #100a1d, #0d1020 55%, #0b0814);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,.48));
+}
+
+.l-page {
+  background:
+    linear-gradient(180deg, rgba(14, 11, 23, .97), rgba(9, 8, 15, .985)) !important;
+  color: var(--pd-text);
+  border-left: 1px solid var(--pd-line);
+  border-right: 1px solid var(--pd-line);
+  box-shadow: 0 0 70px rgba(0,0,0,.72);
+}
+
+.l-content,
+.l-menu,
+.block,
+.b-block {
+  color: var(--pd-text);
+}
+
+
+/* ==========================================================================
+   2. TYPOGRAPHY / LINKS
+   ========================================================================== */
+
+body,
+input,
+textarea,
+select,
+button {
+  color: var(--pd-text);
+}
+
+a,
+.b-link,
+.b-js-link {
+  color: var(--link-color);
+}
+
+a:hover,
+.b-link:hover,
+.b-js-link:hover {
+  color: var(--link-hover-color);
+}
+
+a:active,
+.b-link:active,
+.b-js-link:active {
+  color: var(--link-active-color);
+}
+
+header.head h1,
+header.head h2,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--pd-lilac) !important;
+}
+
+header.head .notice,
+header.head .misc,
+header.head a.edit,
+.b-nothing_here,
+.date,
+.misc,
+.notice {
+  color: var(--pd-muted) !important;
+}
+
+.b-text_with_paragraphs,
+.b-prgrph,
+.b-entry-info,
+.b-source,
+.b-list,
+.b-table {
+  color: var(--pd-text-2);
+}
+
+
+/* ==========================================================================
+   3. TOP MENU
+   ========================================================================== */
+
+.l-top_menu-v2 {
+  background:
+    linear-gradient(180deg, #171221, #0d0a15) !important;
+  color: var(--pd-text) !important;
+  border-bottom: 1px solid var(--pd-line);
+  box-shadow: 0 4px 18px rgba(0,0,0,.45);
+}
+
+.l-top_menu-v2 a,
+.l-top_menu-v2 .menu-dropdown > span,
+.l-top_menu-v2 .menu-dropdown > a {
+  color: var(--pd-text) !important;
+}
+
+.l-top_menu-v2 .menu-dropdown:hover > span,
+.l-top_menu-v2 .menu-dropdown.active > span,
+.l-top_menu-v2 .menu-dropdown:hover > a {
+  background: rgba(128,100,210,.12) !important;
+  color: var(--pd-lilac) !important;
+}
+
+/* Dropdown geometry is intentionally left to the site. */
+.l-top_menu-v2 .submenu {
+  background:
+    linear-gradient(180deg, #161120, #0e0b17) !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line-2) !important;
+  border-top: 2px solid #7258bd !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.58) !important;
+}
+
+.l-top_menu-v2 .submenu > .inner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.l-top_menu-v2 .submenu .legend,
+.l-top_menu-v2 .submenu .title,
+.l-top_menu-v2 .submenu header,
+.l-top_menu-v2 .submenu .menu-section {
+  color: #a69bb7 !important;
+  background: transparent !important;
+  border-color: rgba(184,160,255,.07) !important;
+}
+
+.l-top_menu-v2 .submenu > a,
+.l-top_menu-v2 .submenu a {
+  background: transparent !important;
+  color: #bdb2d1 !important;
+  border-color: transparent !important;
+}
+
+.l-top_menu-v2 .submenu > a:hover,
+.l-top_menu-v2 .submenu a:hover {
+  background:
+    linear-gradient(90deg, rgba(128,100,210,.24), rgba(128,100,210,.04), transparent) !important;
+  color: #f3edff !important;
+  box-shadow: inset 2px 0 0 var(--pd-purple-2);
+}
+
+.l-top_menu-v2 .submenu a::before,
+.l-top_menu-v2 .submenu .icon {
+  color: var(--pd-purple-2) !important;
+}
+
+
+/* ==========================================================================
+   4. SEARCH / AUTOCOMPLETE
+   ========================================================================== */
+
+.l-top_menu-v2 .global-search input,
+.b-main_search .input,
+.b-main_search .input input {
+  background: #0b0912 !important;
+  color: var(--pd-text) !important;
+  border-color: rgba(123,201,242,.22) !important;
+}
+
+.l-top_menu-v2 .global-search input:focus,
+.b-main_search .input:focus-within {
+  border-color: rgba(169,140,255,.52) !important;
+  box-shadow: 0 0 8px rgba(128,100,210,.15);
+}
+
+.l-top_menu-v2 .global-search input::placeholder,
+.b-main_search input::placeholder {
+  color: #706879 !important;
+}
+
+.l-top_menu-v2 .global-search .search-results,
+.b-main_search ul.popup,
+.ac_results,
+.completable-block.menu-suggest {
+  background: #12101d !important;
+  color: var(--pd-text-2) !important;
+  border: 1px solid var(--pd-line-2) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.62) !important;
+}
+
+.l-top_menu-v2 .global-search .search-results > *,
+.b-main_search ul.popup li,
+.ac_results li {
+  background: transparent !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line) !important;
+}
+
+.l-top_menu-v2 .global-search .search-results > *:hover,
+.l-top_menu-v2 .global-search .search-results .active,
+.b-main_search ul.popup li:hover,
+.b-main_search ul.popup li.active,
+.ac_over {
+  background: rgba(128,100,210,.22) !important;
+  color: #fff !important;
+}
+
+.ac_odd {
+  background: rgba(255,255,255,.018) !important;
+}
+
+.ac_results .name,
+.ac_results .name a {
+  color: var(--pd-lilac) !important;
+}
+
+.ac_results .name > strong {
+  background: rgba(255,183,106,.22) !important;
+  color: var(--pd-warm-2) !important;
+}
+
+
+/* ==========================================================================
+   5. HEADLINES
+   ========================================================================== */
+
+.headline,
+.midheadline,
+.subheadline {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(90deg, #2e2149, #1c162d 58%, #12101d) !important;
+
+  color: var(--pd-lilac) !important;
+  border-left-color: #a96b34 !important;
+  border-bottom: 1px solid rgba(184,160,255,.12);
+
+  box-shadow: inset 0 0 10px rgba(0,0,0,.24);
+
+  text-shadow: 0 1px 2px rgba(0,0,0,.55);
+}
+
+/* Preserve original dimensions. */
+.headline {
+  padding-top: 4px !important;
+  padding-bottom: 2px !important;
+}
+
+.midheadline,
+.subheadline {
+  line-height: 30px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.headline > a,
+.midheadline > a,
+.subheadline > a {
+  color: inherit !important;
+}
+
+.headline > a::before,
+.midheadline > a::before,
+.subheadline > a::before {
+  color: var(--pd-warm) !important;
+}
+
+.headline .misc-links,
+.subheadline .misc-link {
+  color: var(--pd-text-2) !important;
+}
+
+
+/* ==========================================================================
+   6. BUTTONS
+   ========================================================================== */
+
+.b-button,
+.b-link_button,
+button,
+input[type="submit"],
+input[type="button"],
+.button {
+  background:
+    linear-gradient(180deg, #302449, #1b152b) !important;
+  color: #dcd1f4 !important;
+  border: 1px solid rgba(184,160,255,.22) !important;
+  box-shadow: none;
+}
+
+.b-button:hover,
+.b-link_button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.button:hover {
+  background: #3a2b59 !important;
+  color: #fff4e5 !important;
+  border-color: rgba(255,183,106,.42) !important;
+}
+
+.b-button:active,
+.b-link_button:active,
+button:active {
+  background: #463365 !important;
+}
+
+
+/* ==========================================================================
+   7. INPUTS / FORMS
+   ========================================================================== */
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+textarea,
+select,
+.b-input input,
+.b-input textarea {
+  background: #0e0b17 !important;
+  color: var(--pd-text) !important;
+  border-color: rgba(184,160,255,.19) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.b-input input:focus,
+.b-input textarea:focus {
+  border-color: rgba(123,201,242,.42) !important;
+  box-shadow: 0 0 7px rgba(123,201,242,.08);
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6f677a !important;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--pd-purple);
+}
+
+.b-checkbox label,
+.b-radio label,
+.b-form label {
+  color: var(--pd-text-2);
+}
+
+.b-form .variants,
+.b-form .actions,
+.b-input,
+.b-input .hint {
+  color: var(--pd-text-2);
+}
+
+.b-errors,
+.b-errors .subheadline {
+  color: #f1a5ae !important;
+}
+
+
+/* ==========================================================================
+   8. POPOVERS / MODALS / TOOLTIPS
+   ========================================================================== */
+
+.b-modal > .inner,
+.popup,
+.b-popup,
+.dropdown,
+.tooltip-inner,
+.tipsy-inner {
+  background: #151120 !important;
+  color: var(--pd-text) !important;
+  border-color: var(--pd-line-2) !important;
+  box-shadow: 0 14px 35px rgba(0,0,0,.6);
+}
+
+.b-shade {
+  background: rgba(4,3,7,.72) !important;
+}
+
+.tooltip-inner .close {
+  background: #261d38 !important;
+  color: var(--pd-text-2) !important;
+}
+
+.tooltip-inner .close:hover {
+  color: var(--pd-warm) !important;
+}
+
+
+/* ==========================================================================
+   9. CARDS / CATALOG / POSTERS
+   ========================================================================== */
+
+.b-catalog_entry {
+  color: var(--pd-text);
+}
+
+.b-catalog_entry .cover {
+  color: var(--pd-text-2) !important;
+}
+
+.b-catalog_entry .cover .title,
+.b-catalog_entry .cover .title a {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-catalog_entry .cover:hover .title,
+.b-catalog_entry .cover .title:hover {
+  color: var(--pd-warm) !important;
+}
+
+.b-catalog_entry .cover .misc,
+.b-catalog_entry .cover .misc span {
+  color: var(--pd-muted) !important;
+}
+
+.b-catalog_entry .cover .misc span.relation {
+  color: var(--pd-text-2) !important;
+}
+
+.b-catalog_entry .image-decor,
+.b-db_entry-poster,
+.c-poster img,
+.b-poster img {
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-catalog_entry .image-decor:hover,
+.c-poster img:hover {
+  box-shadow: 0 0 14px rgba(169,140,255,.10);
+}
+
+.b-catalog_entry-tooltip .inner {
+  background: #151120 !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-catalog_entry-tooltip .inner .line .key {
+  color: var(--pd-muted) !important;
+}
+
+.b-catalog_entry-tooltip .inner .line .value {
+  color: var(--pd-text) !important;
+}
+
+
+/* ==========================================================================
+   10. DB ENTRY / ANIME / MANGA / RANOBE PAGES
+   ========================================================================== */
+
+.b-db_entry {
+  color: var(--pd-text);
+}
+
+.b-db_entry > .c-about,
+.b-db_entry > .c-image {
+  color: var(--pd-text-2);
+}
+
+.b-entry-info .line .key {
+  color: var(--pd-muted) !important;
+}
+
+.b-entry-info .line .value,
+.b-entry-info .line .value * {
+  color: var(--pd-text-2);
+}
+
+.b-entry-info .line .value a {
+  color: var(--pd-purple-2);
+}
+
+.b-tag,
+.b-entry-info .line .b-tag,
+.b-catalog_entry-tooltip .tag {
+  background: #211931 !important;
+  color: #cbbcff !important;
+  border: 1px solid rgba(184,160,255,.16) !important;
+}
+
+.b-tag:hover,
+.b-entry-info .line .b-tag:hover {
+  background: #302344 !important;
+  color: var(--pd-warm-2) !important;
+  border-color: rgba(255,183,106,.34) !important;
+}
+
+.b-anime_status_tag {
+  filter: saturate(.78) brightness(.92);
+}
+
+.p-animes-show .watch-online,
+.p-animes-show .upload-video,
+.p-mangas-show .watch-online,
+.p-mangas-show .upload-video {
+  background:
+    linear-gradient(180deg, #302449, #1d162e) !important;
+  color: var(--pd-lilac) !important;
+  border-color: var(--pd-line-2) !important;
+  box-shadow: 0 0 14px rgba(123,201,242,.09);
+}
+
+
+/* ==========================================================================
+   11. RATING / USER RATE / STATS
+   ========================================================================== */
+
+.b-rate {
+  color: var(--pd-text-2);
+}
+
+.b-rate .stars,
+.b-rate .stars.score,
+.b-rate .stars.hover {
+  color: #74afe2 !important;
+}
+
+.b-rate .score-value {
+  color: var(--pd-text) !important;
+}
+
+.b-rate .score-notice {
+  color: var(--pd-muted) !important;
+}
+
+.b-user_rate {
+  color: var(--pd-text-2);
+}
+
+.b-user_rate .rate-show,
+.b-user_rate .rate-edit {
+  background: transparent !important;
+}
+
+.b-user_rate .rate-show .note,
+.b-user_rate .rate-edit .note {
+  background: #151120 !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line) !important;
+}
+
+.b-stats_bar .title {
+  color: var(--pd-lilac) !important;
+}
+
+.b-stats_bar .bar {
+  background: #090710 !important;
+  border: 1px solid var(--pd-line) !important;
+}
+
+.b-stats_bar .bar .first {
+  background: linear-gradient(90deg, #5940a6, #8d70df, #b29cff) !important;
+}
+
+.b-stats_bar .bar .second {
+  background: linear-gradient(90deg, #315e7d, #5fa7d3, #94d9f7) !important;
+}
+
+.b-stats_bar .stat_names,
+.b-stats_bar .stat_names * {
+  color: var(--pd-text-2) !important;
+}
+
+
+/* ==========================================================================
+   12. COLLECTIONS / CLUBS / USERS
+   ========================================================================== */
+
+.b-collection-topic,
+.b-club,
+.b-user,
+.b-user.detailed,
+.b-user.named_avatar {
+  color: var(--pd-text-2);
+}
+
+.b-club .name,
+.b-user .name,
+.b-user.detailed .info .image-name,
+.b-user.named_avatar .name {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-club .info,
+.b-user.detailed .history,
+.b-user_history-line {
+  color: var(--pd-muted) !important;
+}
+
+.b-collection_search .field input {
+  background: #0d0a15 !important;
+  color: var(--pd-text) !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-collection-filters .block,
+.b-header_filters {
+  color: var(--pd-text-2);
+}
+
+.b-header_filters .filter-line,
+.b-collection-filters .block > .filter {
+  border-color: var(--pd-line) !important;
+}
+
+
+/* ==========================================================================
+   13. COMMENTS / MESSAGES / DIALOGS
+   ========================================================================== */
+
+.b-comment,
+.b-message,
+.b-dialog {
+  color: var(--pd-text-2);
+  border-color: var(--pd-line) !important;
+}
+
+.b-comment > .inner,
+.b-message > .inner,
+.b-dialog > .inner {
+  background: transparent !important;
+}
+
+.b-comment > .inner header .name-date a.name,
+.b-message > .inner header .name-date a.name,
+.b-dialog > .inner header .name-date a.name {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-comment > .inner header .name-date .time,
+.b-message > .inner header .name-date .time,
+.b-dialog > .inner header .name-date .time,
+.b-comment-info {
+  color: var(--pd-muted) !important;
+}
+
+.b-comment .body,
+.b-message .body,
+.b-dialog .body {
+  color: var(--pd-text-2);
+}
+
+.b-comments .comments-loader,
+.b-comments .comments-hider,
+.b-comments .comments-collapser,
+.b-show_more,
+.b-show_more-more {
+  background: #211931 !important;
+  color: #cbbcff !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-comments .comments-loader:hover,
+.b-show_more:hover,
+.b-show_more-more:hover {
+  background: #302344 !important;
+  color: var(--pd-warm-2) !important;
+}
+
+
+/* ==========================================================================
+   14. TOPICS / FORUM
+   ========================================================================== */
+
+.b-topic,
+.b-forum,
+.b-forums .forum,
+.b-topic-preview,
+.b-topic-minified {
+  color: var(--pd-text-2);
+  border-color: var(--pd-line) !important;
+}
+
+.b-topic > .inner header .name-date a.name,
+.b-topic-preview .name,
+.b-forum .name,
+.b-forums .forum .name {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-topic .about,
+.b-topic .about > span,
+.b-forum .topics,
+.b-forums .forum .topics {
+  color: var(--pd-muted) !important;
+}
+
+.b-topic .footer-vote,
+.b-footer_vote {
+  background: transparent !important;
+  color: var(--pd-text-2) !important;
+}
+
+.b-topic .footer-vote .vote-group .vote,
+.b-footer_vote .vote {
+  background: #211931 !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line) !important;
+}
+
+
+/* ==========================================================================
+   15. REVIEWS / CRITIQUES
+   ========================================================================== */
+
+.b-review-topic,
+.b-critique-topic {
+  color: var(--pd-text-2);
+  border-color: var(--pd-line) !important;
+}
+
+.b-review-topic .name-date .name,
+.b-review-topic .name-date .name a,
+.b-critique-topic .name-date .name {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-review-topic .body,
+.b-review-topic .body *,
+.b-critique-topic .body {
+  color: var(--pd-text-2);
+}
+
+.b-review_votes,
+.b-critique_votes {
+  color: var(--pd-muted);
+}
+
+.b-review_votes .votes-for,
+.b-critique_votes .votes-for {
+  color: var(--pd-green) !important;
+}
+
+.b-review_votes .votes-against,
+.b-critique_votes .votes-against {
+  color: var(--pd-red) !important;
+}
+
+.b-reviews_navigation .navigation-container {
+  color: var(--pd-text-2);
+}
+
+.b-reviews_navigation .navigation-node {
+  background: #191426 !important;
+  color: #c8bdd8 !important;
+  border-color: #624a8e !important;
+}
+
+.b-reviews_navigation .navigation-node:hover {
+  background: #241b35 !important;
+  color: #f2ebff !important;
+}
+
+.b-reviews_navigation .navigation-node.is-active {
+  background: #2e2147 !important;
+  color: var(--pd-lilac) !important;
+  border-color: var(--pd-warm) !important;
+}
+
+.b-reviews_navigation .navigation-node-positive {
+  border-color: #648b6c !important;
+}
+
+.b-reviews_navigation .navigation-node-neutral {
+  border-color: #527994 !important;
+}
+
+.b-reviews_navigation .navigation-node-negative {
+  border-color: #91606a !important;
+}
+
+
+/* ==========================================================================
+   16. EDITOR
+   ========================================================================== */
+
+.b-shiki_editor {
+  color: var(--pd-text-2);
+}
+
+.b-shiki_editor .controls,
+.b-shiki_editor .links,
+.b-shiki_editor .images,
+.b-shiki_editor .quotes,
+.b-shiki_editor .upload {
+  color: var(--pd-text-2);
+}
+
+.b-shiki_editor .body .editor textarea,
+.b-shiki_editor .body .editor .prose-mirror,
+.b-shiki_editor textarea,
+.ProseMirror {
+  background: #0e0b17 !important;
+  color: var(--pd-text) !important;
+  border-color: rgba(184,160,255,.20) !important;
+}
+
+.b-shiki_editor .body .preview {
+  background: #12101d !important;
+  color: var(--pd-text-2) !important;
+}
+
+.b-shiki_editor .controls a,
+.b-shiki_editor .controls span,
+.editor-controls > span {
+  color: #d8cdf0 !important;
+}
+
+.b-shiki_editor .controls a:hover,
+.editor-controls > span:hover {
+  color: var(--pd-warm) !important;
+}
+
+.b-shiki_editor .link-value {
+  background: #0e0b17 !important;
+  color: var(--pd-text) !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-shiki_editor footer {
+  color: var(--pd-muted);
+}
+
+
+/* ==========================================================================
+   17. SPOILERS / QUOTES / CODE
+   ========================================================================== */
+
+.b-spoiler,
+.b-spoiler_block,
+.b-spoiler_inline {
+  color: var(--pd-text-2);
+}
+
+.b-spoiler label,
+.b-spoiler_block > label {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-spoiler .content,
+.b-spoiler_block .content {
+  background: rgba(128,100,210,.06) !important;
+  border-color: rgba(169,140,255,.23) !important;
+}
+
+.b-quote,
+.b-quote-v2,
+blockquote {
+  background: rgba(128,100,210,.07) !important;
+  color: #cfc5df !important;
+  border-color: rgba(169,140,255,.35) !important;
+}
+
+.b-code-v2,
+pre,
+code {
+  background: #0b0912 !important;
+  color: #d8d0e5 !important;
+  border-color: var(--pd-line) !important;
+}
+
+
+/* ==========================================================================
+   18. TABLES
+   ========================================================================== */
+
+.b-table,
+table {
+  color: var(--pd-text-2);
+}
+
+.b-table tr,
+.b-table td,
+.b-table th,
+table tr,
+table td,
+table th {
+  border-color: rgba(184,160,255,.09) !important;
+}
+
+.b-table th,
+table th {
+  color: var(--pd-lilac) !important;
+}
+
+.b-table tr:hover,
+table tbody tr:hover {
+  background: rgba(128,100,210,.05);
+}
+
+
+/* ==========================================================================
+   19. POLLS / QUESTIONS / NOTICES / WARNINGS
+   ========================================================================== */
+
+.b-poll,
+.b-question,
+.b-notice,
+.b-warning {
+  background: #171222 !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-warning {
+  border-left-color: var(--pd-warm) !important;
+}
+
+.b-errors {
+  background: rgba(145, 64, 78, .16) !important;
+  border-color: rgba(227,110,124,.32) !important;
+}
+
+
+/* ==========================================================================
+   20. VIDEO / PLAYER
+   ========================================================================== */
+
+.b-video .video-link {
+  background: #090710 !important;
+}
+
+.b-video_player,
+.b-video_player .player-area,
+.p-anime_videos-index .c-videos {
+  background: #0d0a15 !important;
+  color: var(--pd-text-2) !important;
+}
+
+.b-video_player .cc-player_controls {
+  background:
+    linear-gradient(180deg, #2d2145, #191327) !important;
+  color: var(--pd-text) !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-video_player .cc-player_controls .c-control,
+.b-video_player .cc-player_controls .episode-title,
+.b-video_player .cc-player_controls .episode-num {
+  color: var(--pd-text-2) !important;
+}
+
+.b-video_player .cc-player_controls .c-control:hover,
+.b-video_player .cc-player_controls .c-control.selected {
+  background: rgba(128,100,210,.18) !important;
+  color: #fff !important;
+}
+
+.b-video_player .cc-player_controls .c-control .icon {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-video_player .cc-player_controls .episode-num input {
+  background: #0e0b17 !important;
+  color: var(--pd-text) !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-video_variant,
+.p-anime_videos-index .c-videos .video-variant-switcher {
+  background: #151120 !important;
+  color: var(--pd-text-2) !important;
+  border-color: var(--pd-line) !important;
+}
+
+.b-video_variant:hover,
+.p-anime_videos-index .c-videos .video-variant-switcher:hover {
+  background: rgba(128,100,210,.18) !important;
+}
+
+.b-video_variant.active,
+.p-anime_videos-index .c-videos .video-variant-switcher.active {
+  background: rgba(128,100,210,.25) !important;
+  box-shadow: inset 3px 0 0 var(--pd-cyan);
+}
+
+
+/* ==========================================================================
+   21. PROFILE
+   ========================================================================== */
+
+.p-profiles .profile-head {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(44,24,68,.78),
+      rgba(16,13,27,.91) 35%,
+      rgba(16,13,27,.91) 66%,
+      rgba(29,29,60,.72)
+    ) !important;
+
+  border: 1px solid var(--pd-line-2);
+  border-top: 2px solid rgba(255,183,106,.48);
+  box-shadow:
+    inset 0 0 50px rgba(0,0,0,.48),
+    0 8px 25px rgba(0,0,0,.42);
+}
+
+.p-profiles .profile-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 76% 30%, rgba(216,206,255,.12), transparent 23%),
+    radial-gradient(circle at 34% 37%, rgba(123,201,242,.07), transparent 21%);
+}
+
+.p-profiles .profile-head > * {
+  position: relative;
+  z-index: 1;
+}
+
+.p-profiles .profile-head h1,
+.p-profiles .profile-head .name {
+  color: var(--pd-lilac) !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,.72);
+}
+
+.p-profiles .profile-head .c-info,
+.p-profiles .profile-head .c-info *,
+.p-profiles .profile-head .notice,
+.p-profiles .profile-head .misc {
+  color: var(--pd-muted) !important;
+}
+
+.p-profiles .profile-head .avatar img,
+.p-profiles .profile-head img.avatar {
+  background: #0b0912 !important;
+  border: 2px solid rgba(169,140,255,.54) !important;
+  box-shadow:
+    0 0 0 4px rgba(18,14,30,.88),
+    0 0 16px rgba(169,140,255,.12);
+}
+
+.p-profiles .profile-head .c-history {
+  background: rgba(8,7,14,.5) !important;
+  border-left-color: var(--pd-line) !important;
+}
+
+.p-profiles .profile-head .c-history .entry {
+  border-color: var(--pd-line) !important;
+}
+
+.p-profiles .cc-friends,
+.p-profiles .cc-clubs,
+.p-profiles .cc-favourites {
+  background: rgba(14,11,23,.35);
+}
+
+
+/* ==========================================================================
+   22. DASHBOARD
+   ========================================================================== */
+
+.p-dashboards-show .b-hot_topics-v2,
+.p-dashboards-show .b-forums,
+.p-dashboards-show .b-news_line-topic,
+.p-dashboards-show .b-news_wall-topic {
+  color: var(--pd-text-2);
+}
+
+.p-dashboards-show .b-link_button,
+.p-dashboards-show .b-tag {
+  background: #211931 !important;
+  color: #cbbcff !important;
+  border-color: var(--pd-line) !important;
+}
+
+.p-dashboards-show .b-link_button:hover,
+.p-dashboards-show .b-tag:hover {
+  background: #302344 !important;
+  color: var(--pd-warm-2) !important;
+}
+
+
+/* ==========================================================================
+   23. ANIME / MANGA CATALOG FILTERS
+   ========================================================================== */
+
+.p-animes-index .l-menu,
+.p-mangas-index .l-menu,
+.p-ranobe-index .l-menu,
+.p-recommendations-index .l-menu {
+  color: var(--pd-text-2);
+}
+
+.p-animes-index .l-menu label,
+.p-mangas-index .l-menu label,
+.p-ranobe-index .l-menu label {
+  color: var(--pd-text-2) !important;
+}
+
+.p-animes-index .l-menu .disabled,
+.p-mangas-index .l-menu .disabled,
+.p-ranobe-index .l-menu .disabled {
+  color: var(--pd-faint) !important;
+}
+
+.b-options-floated a,
+.b-options-floated span {
+  color: var(--pd-text-2);
+}
+
+.b-options-floated a.selected,
+.b-options-floated a:hover {
+  color: var(--pd-warm) !important;
+}
+
+
+/* ==========================================================================
+   24. USER LISTS
+   ========================================================================== */
+
+.p-user_rates-index .l-menu,
+.p-user_rates-index .l-content {
+  color: var(--pd-text-2);
+}
+
+.p-user_rates-index .stat-categories .category,
+.p-user_rates-index .list-groups .summary,
+.p-user_rates-index .list-lines tr {
+  border-color: var(--pd-line) !important;
+}
+
+.p-user_rates-index .stat-categories .category:hover,
+.p-user_rates-index .stat-categories .category.active {
+  background: rgba(128,100,210,.13) !important;
+  color: var(--pd-lilac) !important;
+}
+
+.p-user_rates-index .list-lines tr.edit-form form {
+  background: #151120 !important;
+  color: var(--pd-text) !important;
+}
+
+
+/* ==========================================================================
+   25. PAGINATION
+   ========================================================================== */
+
+.b-pages,
+.pagination {
+  color: var(--pd-muted);
+}
+
+.b-pages a,
+.pagination a,
+.pagination .link {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-pages a:hover,
+.pagination a:hover,
+.pagination .link:hover {
+  color: var(--pd-warm) !important;
+}
+
+.b-pages .current,
+.pagination .current,
+.pagination .active {
+  color: #fff !important;
+}
+
+
+/* ==========================================================================
+   26. MARKERS / STATUS / BADGES
+   ========================================================================== */
+
+.b-badge,
+.b-new_marker,
+.b-summary_marker,
+.b-offtopic_marker,
+.b-broadcast_marker,
+.b-spoiler_marker {
+  filter: saturate(.78) brightness(.92);
+}
+
+.b-new_marker {
+  color: var(--pd-cyan-2) !important;
+}
+
+.b-offtopic_marker {
+  color: var(--pd-muted) !important;
+}
+
+.b-spoiler_marker {
+  color: var(--pd-warm) !important;
+}
+
+
+/* ==========================================================================
+   27. IMAGE / GALLERY / UPLOAD
+   ========================================================================== */
+
+.b-gallery,
+.b-image,
+.b-dropzone {
+  color: var(--pd-text-2);
+}
+
+.b-dropzone {
+  background: rgba(128,100,210,.05) !important;
+  border-color: rgba(169,140,255,.28) !important;
+}
+
+.b-upload_progress {
+  background: #151120 !important;
+  border-color: var(--pd-line) !important;
+}
+
+
+/* ==========================================================================
+   28. ACHIEVEMENTS
+   ========================================================================== */
+
+.b-achievement {
+  color: var(--pd-text-2);
+}
+
+.b-achievement .c-about .title {
+  color: var(--pd-purple-2) !important;
+}
+
+.b-achievement .c-about .progress {
+  background: #090710 !important;
+  border-color: var(--pd-line) !important;
+}
+
+.b-achievement .c-about .progress .bar {
+  background: linear-gradient(90deg, var(--pd-purple), var(--pd-cyan)) !important;
+}
+
+.b-achievement .c-about .hint {
+  color: var(--pd-muted) !important;
+}
+
+
+/* ==========================================================================
+   29. ADMIN / MODERATION / EDIT PAGES
+   ========================================================================== */
+
+.b-admin_panel,
+.p-moderations .l-content,
+.p-moderations .l-menu,
+.p-db_entries-edit,
+.p-profiles-edit {
+  color: var(--pd-text-2);
+}
+
+.b-admin_panel,
+.b-dangerous-actions {
+  background: #151120 !important;
+  border-color: var(--pd-line-2) !important;
+}
+
+.b-dangerous-actions {
+  border-left-color: var(--pd-red) !important;
+}
+
+
+/* ==========================================================================
+   30. FOOTER
+   ========================================================================== */
+
+.l-footer {
+  color: var(--pd-muted) !important;
+  border-color: var(--pd-line) !important;
+}
+
+.l-footer a {
+  color: #a999d3 !important;
+}
+
+.l-footer a:hover {
+  color: var(--pd-warm) !important;
+}
+
+
+/* ==========================================================================
+   31. SCROLLBAR / SELECTION
+   ========================================================================== */
+
+::selection {
+  color: #fff;
+  background: rgba(128,100,210,.68);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0811;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6651a8, #34264f);
+  border: 2px solid #0a0811;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pd-purple-2);
+}
+
+
+/* ==========================================================================
+   32. RESPONSIVE
+   ========================================================================== */
+
+@media screen and (max-width: 1023px) {
+  .l-top_menu-v2 .submenu {
+    box-shadow: none !important;
+  }
+
+  .b-modal > .inner {
+    background: #151120 !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .l-page {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  header.head h1,
+  header.head h2 {
+    color: var(--pd-lilac) !important;
+  }
+
+  .headline {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .midheadline,
+  .subheadline {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .p-profiles .profile-head {
+    box-shadow: inset 0 0 34px rgba(0,0,0,.42);
+  }
+}
+
+
+/* ==========================================================================
+   33. FALLBACKS FOR COMMON LIGHT REMNANTS
+   ========================================================================== */
+
+/* These target known Shikimori UI containers, not arbitrary divs. */
+.b-modal > .inner,
+.ac_results,
+.completable-block.menu-suggest,
+.b-main_search ul.popup,
+.l-top_menu-v2 .global-search .search-results,
+.b-shiki_editor .body .editor textarea,
+.b-shiki_editor .body .editor .prose-mirror,
+.p-user_rates-index .list-lines tr.edit-form form {
+  background-color: #12101d !important;
+}
+
+.b-modal > .inner,
+.ac_results,
+.completable-block.menu-suggest,
+.b-main_search ul.popup,
+.l-top_menu-v2 .global-search .search-results {
+  color: var(--pd-text) !important;
+}
+
+/* General component coverage ends here; live contrast fixes follow. */
+
+
+/* ==========================================================================
+   34. CONTRAST FIXES — SHIKIMORI.RIP LIVE COMPONENTS
+   ========================================================================== */
+
+/* Global search: the real result rows are nested inside `.inner`, therefore
+   the generic direct-child rule above does not reach their text. */
+.l-top_menu-v2 .global-search .search-results .search-mode,
+.l-top_menu-v2 .global-search .search-results .nothing_found,
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item,
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .info {
+  color: #c9c1d8 !important;
+}
+
+.l-top_menu-v2 .global-search .search-results .search-mode:hover,
+.l-top_menu-v2 .global-search .search-results .search-mode.active,
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item:hover,
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item.active {
+  color: #f5f0ff !important;
+  background: linear-gradient(90deg, rgba(128,100,210,.24), rgba(128,100,210,.05)) !important;
+}
+
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .name,
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .name .b-link {
+  color: #ded4ff !important;
+}
+
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .line .key {
+  color: #9d93ad !important;
+}
+
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .line .value,
+.l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .b-separator {
+  color: #bcb2ca !important;
+}
+
+.l-top_menu-v2 .global-search .search-results::before {
+  background: linear-gradient(0deg, rgba(18,16,29,0), #12101d) !important;
+}
+
+.l-top_menu-v2 .global-search .search-results::after {
+  background: linear-gradient(180deg, rgba(18,16,29,0), #12101d) !important;
+}
+
+/* Dashboard "My list": remove the remaining light native card and keep all
+   small labels readable on the new dark surface. */
+.p-dashboards-show .v2 .my-list {
+  background: linear-gradient(145deg, #171426, #11101d) !important;
+  color: var(--pd-text-2) !important;
+  border-color: rgba(123,201,242,.24) !important;
+}
+
+.p-dashboards-show .v2 .my-list .label span,
+.p-dashboards-show .v2 .my-list .entry .name,
+.p-dashboards-show .v2 .my-list .entry .name a {
+  color: #e1d8f4 !important;
+}
+
+.p-dashboards-show .v2 .my-list .entry,
+.p-dashboards-show .v2 .my-list .entry .status,
+.p-dashboards-show .v2 .my-list .entry .episodes,
+.p-dashboards-show .v2 .my-list .entry .misc,
+.p-dashboards-show .v2 .my-list .b-user_rate,
+.p-dashboards-show .v2 .my-list .b-user_rate .rate-show,
+.p-dashboards-show .v2 .my-list .b-user_rate .rate-edit,
+.p-dashboards-show .v2 .my-list .b-user_rate .status,
+.p-dashboards-show .v2 .my-list .b-user_rate .episodes,
+.p-dashboards-show .v2 .my-list .b-nothing_here {
+  color: #aba1bb !important;
+}
+
+.p-dashboards-show .v2 .my-list .misc-links a {
+  color: #8fd5f7 !important;
+}
+
+/* Top reviews intentionally keep their pastel cards. Use dark typography
+   inside them instead of the global light text intended for dark panels. */
+.p-dashboards-show .review-slide,
+.p-dashboards-show .review-slide .b-review-topic,
+.p-dashboards-show .review-slide .b-review-topic .body,
+.p-dashboards-show .review-slide .b-review-topic .body * {
+  color: #5b5365 !important;
+}
+
+.p-dashboards-show .review-slide .mini-review-author,
+.p-dashboards-show .review-slide .about,
+.p-dashboards-show .review-slide .about > span {
+  color: #514a59 !important;
+}
+
+.p-dashboards-show .review-slide .mini-review-eyebrow {
+  color: #756d7d !important;
+}
+
+.p-dashboards-show .review-slide .mini-review-title,
+.p-dashboards-show .review-slide .b-review-topic .title,
+.p-dashboards-show .review-slide .b-review-topic .title a,
+.p-dashboards-show .review-slide .b-topic-preview .name {
+  color: #075f9b !important;
+}
+
+.p-dashboards-show .review-slide .b-review-topic .body a,
+.p-dashboards-show .review-slide .b-review-topic .body .b-link {
+  color: #176a9d !important;
+}
+
+.p-dashboards-show .review-slide .b-height_shortener .expand,
+.p-dashboards-show .review-slide .b-height_shortener .expand span {
+  color: #176a9d !important;
+  border-bottom-color: rgba(23,106,157,.32) !important;
+}
+
+.p-dashboards-show .review-slide.color-0 .b-height_shortener .shade {
+  background-image: linear-gradient(rgba(230,244,234,0), #e6f4ea) !important;
+}
+
+.p-dashboards-show .review-slide.color-1 .b-height_shortener .shade {
+  background-image: linear-gradient(rgba(255,248,225,0), #fff8e1) !important;
+}
+
+.p-dashboards-show .review-slide.color-2 .b-height_shortener .shade {
+  background-image: linear-gradient(rgba(255,235,238,0), #ffebee) !important;
+}
+
+/* Forum/news topic title: Shikimori sets #123 on the h1 itself. */
+.p-topics-show header.head h1,
+.p-topics-show header.head h1 a,
+.p-topics-show header.head h2,
+.p-topics-show header.head h2 a,
+.p-forums-show header.head h1,
+.p-forums-show header.head h1 a {
+  color: #d9d0f1 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.55);
+}
+
+/* ==========================================================================
+   35. CATALOG — SEASON AND PERIOD
+   ========================================================================== */
+
+.season-selector-box {
+  position: relative;
+  padding: 10px 8px 8px !important;
+  background: linear-gradient(180deg, rgba(24,19,39,.96), rgba(14,11,23,.98)) !important;
+  color: var(--pd-text-2) !important;
+  border: 1px solid var(--pd-line) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018), 0 5px 15px rgba(0,0,0,.22) !important;
+}
+
+.season-selector-box .season-selector {
+  padding-bottom: 8px !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid rgba(184,160,255,.08) !important;
+}
+
+.season-selector-box .range-selector { padding-top: 0 !important; }
+.season-selector-box .range-selector_label { color: #978da8 !important; font-size: 12px !important; text-shadow: none !important; }
+
+.season-selector-box .year-dropdown_trigger,
+.season-selector-box .season-selector_season {
+  box-sizing: border-box !important;
+  background: linear-gradient(180deg, #151120, #0e0b17) !important;
+  color: #d8cfea !important;
+  border: 1px solid rgba(184,160,255,.20) !important;
+  border-radius: 3px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018) !important;
+}
+
+.season-selector-box .year-dropdown_trigger *,
+.season-selector-box .year-dropdown_trigger::before { color: #d8cfea !important; }
+.season-selector-box .year-dropdown_trigger::after { border-top-color: #968ba8 !important; }
+
+.season-selector-box .year-dropdown:hover .year-dropdown_trigger,
+.season-selector-box .season-selector_season:hover {
+  background: #1c162a !important;
+  border-color: rgba(169,140,255,.36) !important;
+}
+
+.season-selector-box .season-selector_season:focus-visible,
+.season-selector-box .year-dropdown_trigger:focus-visible {
+  outline: 2px solid var(--pd-cyan) !important;
+  outline-offset: 2px;
+}
+
+.season-selector-box .season-selector_season option { background: #151120; color: #d8cfea; }
+.season-selector-box .year-dropdown_list {
+  background: #151120 !important;
+  color: #c9bfd8 !important;
+  border: 1px solid var(--pd-line-2) !important;
+  border-radius: 3px !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.62) !important;
+}
+
+.season-selector-box .year-dropdown_list li { background: transparent !important; color: #beb4cd !important; }
+.season-selector-box .year-dropdown_list li:hover { background: rgba(128,100,210,.20) !important; color: #f1ebff !important; }
+.season-selector-box .year-dropdown_list li.selected,
+.season-selector-box .year-dropdown_list li.active {
+  background: rgba(128,100,210,.30) !important;
+  color: var(--pd-lilac) !important;
+  box-shadow: inset 2px 0 0 var(--pd-purple-2) !important;
+}
+
+.season-selector-box .season-selector_add,
+.season-selector-box .range-selector_apply {
+  background: linear-gradient(180deg, #302449, #1b152b) !important;
+  color: #ddd3f4 !important;
+  border: 1px solid rgba(184,160,255,.24) !important;
+  border-radius: 3px !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.season-selector-box .season-selector_add:hover,
+.season-selector-box .range-selector_apply:hover {
+  background: #3a2b59 !important;
+  color: var(--pd-warm-2) !important;
+  border-color: rgba(255,183,106,.42) !important;
+}
+
+.season-selector-box .season-selector_reset,
+.season-selector-box .range-selector_reset { color: #81788e !important; text-decoration: none !important; }
+.season-selector-box .season-selector_reset:hover,
+.season-selector-box .range-selector_reset:hover { color: #b9a7fa !important; }
+
+/* Both class variants are used by different versions of the component. */
+.season-selector-box .range-selector-box_hint,
+.season-selector-box .range-selector_box_hint {
+  background: #151120 !important;
+  color: #8f849f !important;
+  border: 1px solid var(--pd-line) !important;
+  box-shadow: none !important;
+}
+.season-selector-box .range-selector-box_hint_popup,
+.season-selector-box .range-selector_box_hint_popup {
+  background: #151120 !important;
+  color: #c8bed7 !important;
+  border: 1px solid var(--pd-line-2) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.62) !important;
+}
+
+/* ==========================================================================
+   36. MODERATION — EDITABLE GRID
+   ========================================================================== */
+
+.b-table.b-editable_grid { background: #0d0a15 !important; color: var(--pd-text-2) !important; border: 1px solid var(--pd-line) !important; }
+.b-table.b-editable_grid thead th {
+  background: linear-gradient(180deg, #282039, #1b1628) !important;
+  color: #ddd5eb !important;
+  border-color: var(--pd-line) !important;
+}
+.b-table.b-editable_grid thead a,
+.b-table.b-editable_grid thead .sort-possible { color: #ddd5eb !important; }
+.b-table.b-editable_grid thead a:hover,
+.b-table.b-editable_grid thead .sort-possible:hover { color: var(--pd-warm) !important; }
+
+.b-table.b-editable_grid tbody td {
+  background: #151120 !important;
+  color: #bdb4cb !important;
+  border-color: rgba(184,160,255,.07) !important;
+  text-shadow: none !important;
+}
+.b-table.b-editable_grid tbody tr:nth-child(even) td { background: #0e0b17 !important; }
+.b-table.b-editable_grid tbody tr:hover td { background: rgba(128,100,210,.14) !important; }
+.b-table.b-editable_grid tbody td a { color: #8bcaf0 !important; }
+.b-table.b-editable_grid tbody td a:hover { color: var(--pd-warm) !important; }
+.b-table.b-editable_grid tbody td:last-child { color: #c8bfd5 !important; }
+
+/* ==========================================================================
+   37. PROJECT CARDS — BODY, VOTES AND ACTIONS
+   ========================================================================== */
+
+.body:has(> .title):has(> .description):has(> .votes) {
+  background: linear-gradient(180deg, #171321, #100d19) !important;
+  color: var(--pd-text-2) !important;
+  border-top: 1px solid var(--pd-line) !important;
+  border-radius: 0 0 12px 12px !important;
+}
+.body:has(> .title):has(> .description):has(> .votes) > .title a { color: #ddd4f1 !important; }
+.body:has(> .title):has(> .description):has(> .votes) > .description { color: #9f95ad !important; }
+.body:has(> .title):has(> .description):has(> .votes) > .description a,
+.body:has(> .title):has(> .description):has(> .votes) > .actions a { color: #a99af0 !important; }
+.body:has(> .title):has(> .description):has(> .votes) > .votes .vote {
+  background: linear-gradient(180deg, #2c2143, #1a1428) !important;
+  color: #ddd3f3 !important;
+  border: 1px solid rgba(184,160,255,.22) !important;
+}
+.body:has(> .title):has(> .description):has(> .votes) > .votes .vote:not(:disabled):hover {
+  background: #3a2b59 !important;
+  color: #fff4e5 !important;
+  border-color: rgba(255,183,106,.40) !important;
+}
+.body:has(> .title):has(> .description):has(> .votes) > .votes .vote:disabled {
+  background: #191521 !important;
+  color: #80778e !important;
+  border-color: var(--pd-line) !important;
+  opacity: .75 !important;
+}
+.body:has(> .title):has(> .description):has(> .votes) > .title a:hover,
+.body:has(> .title):has(> .description):has(> .votes) > .description a:hover,
+.body:has(> .title):has(> .description):has(> .votes) > .actions a:hover { color: var(--pd-warm) !important; }
+
+/* ==========================================================================
+   38. PLAYER SOURCE DROPDOWN
+   ========================================================================== */
+
+.player-dropdown__list {
+  background: #0f0c18 !important;
+  color: var(--pd-text-2) !important;
+  border: 1px solid rgba(184,160,255,.20) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.58) !important;
+}
+.player-dropdown__list .player-dropdown__row { background: #151120 !important; color: #bdb4cb !important; border-color: rgba(184,160,255,.07) !important; }
+.player-dropdown__list .player-dropdown__row:nth-child(even) { background: #0f0c18 !important; }
+.player-dropdown__list .player-dropdown__row:hover { background: rgba(128,100,210,.24) !important; }
+.player-dropdown__list .player-dropdown__row:is(.active, .selected, [aria-selected="true"]) {
+  background: rgba(128,100,210,.30) !important;
+  color: var(--pd-lilac) !important;
+  box-shadow: inset 3px 0 0 var(--pd-purple-2) !important;
+}
+.player-dropdown__cell { color: #aaa0ba !important; border-color: rgba(184,160,255,.08) !important; }
+.player-dropdown__cell--name { color: #d9d0e9 !important; }
+.player-dropdown__cell--episodes { color: #b9a7fa !important; }
+.player-dropdown__row:hover .player-dropdown__cell { color: #e7def4 !important; }
+.player-dropdown__caret { color: #9489a5 !important; }
+.player-dropdown__trigger {
+  background: linear-gradient(180deg, #211931, #151120) !important;
+  color: #d8cfea !important;
+  border: 1px solid rgba(184,160,255,.20) !important;
+  box-shadow: none !important;
+}
+.player-dropdown__trigger:hover,
+.player-dropdown__trigger[aria-expanded="true"] {
+  background: #2b203f !important;
+  color: #f0eaff !important;
+  border-color: rgba(169,140,255,.38) !important;
+}

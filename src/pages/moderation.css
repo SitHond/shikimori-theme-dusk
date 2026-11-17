@@ -1,0 +1,73 @@
+/* ===== pages/moderation =====
+   модерация и правки: панели, опасные действия, редактируемая таблица */
+
+@media screen and (min-width: 1px) {
+    .b-admin_panel,
+    .p-moderations .l-content,
+    .p-moderations .l-menu,
+    .p-db_entries-edit,
+    .p-profiles-edit {
+        color: rgb(var(--text-2));
+    }
+
+    .b-admin_panel,
+    .b-dangerous-actions {
+        background: var(--plate-bg) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-dangerous-actions {
+        border-left-color: rgb(var(--red)) !important;
+    }
+
+    /* редактируемая таблица */
+    .b-table.b-editable_grid {
+        background: rgb(var(--page)) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    .b-table.b-editable_grid thead th {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 16%, rgb(var(--panel))),
+            color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--panel)))) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 90%, rgb(var(--text-2))) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-table.b-editable_grid thead a,
+    .b-table.b-editable_grid thead .sort-possible {
+        color: color-mix(in srgb, rgb(var(--text)) 90%, rgb(var(--text-2))) !important;
+    }
+
+    .b-table.b-editable_grid tbody td {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-faint) !important;
+        text-shadow: none !important;
+    }
+
+    .b-table.b-editable_grid tbody tr:nth-child(even) td {
+        background: rgb(var(--field)) !important;
+    }
+
+    .b-table.b-editable_grid tbody td a {
+        color: color-mix(in srgb, rgb(var(--cyan)) 85%, rgb(var(--cyan-2))) !important;
+    }
+
+    .b-table.b-editable_grid tbody td:last-child {
+        color: var(--text-mid) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-table.b-editable_grid thead a:hover,
+    .b-table.b-editable_grid thead .sort-possible:hover,
+    .b-table.b-editable_grid tbody td a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .b-table.b-editable_grid tbody tr:hover td {
+        background: rgba(var(--accent), .14) !important;
+    }
+}

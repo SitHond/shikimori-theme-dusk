@@ -1,0 +1,25 @@
+/* ===== pages/achievements =====
+   достижения: названия, полосы прогресса */
+
+@media screen and (min-width: 1px) {
+    .b-achievement {
+        color: rgb(var(--text-2));
+    }
+
+    .b-achievement .c-about .title {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-achievement .c-about .progress {
+        background: rgb(var(--deep)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-achievement .c-about .progress .bar {
+        background: linear-gradient(90deg, rgb(var(--accent)), rgb(var(--cyan))) !important;
+    }
+
+    .b-achievement .c-about .hint {
+        color: rgb(var(--text-3)) !important;
+    }
+}

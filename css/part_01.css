@@ -1,0 +1,2068 @@
+/* shiki dusk v0.1.0 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
+/* ===== tokens/palette =====
+   палитра темы: исходные цвета (rgb-тройки без rgb()) и родные переменные шикимори.
+   свои цвета задаются в site.css внутри той же обёртки @media … { html:root { … } },
+   без неё шикимори применит их только на ширине ≥1024. */
+
+@media screen and (min-width: 1px) {
+    html:root {
+        /* ПАЛИТРА ТЕМЫ */
+
+        /* акцент: фиолетовые сумерки */
+        --accent: 128, 100, 210;        /* главный фиолетовый: кнопки, подсветка строк, выделение */
+        --accent-2: 169, 140, 255;      /* светлый фиолетовый: значки, ники, названия */
+        --link: 185, 167, 250;          /* ссылки */
+        --lilac: 216, 206, 255;         /* заголовки */
+
+        /* лампа: тёплый свет под курсором */
+        --warm: 255, 183, 106;          /* ссылки и кнопки под курсором */
+        --warm-2: 255, 214, 163;        /* светлый тёплый: текст на чипах под курсором */
+        --lamp: 169, 107, 52;           /* тёплая полоска слева у заголовков */
+
+        /* холодный акцент */
+        --cyan: 123, 201, 242;          /* фокус полей, отметки, вторая шкала */
+        --cyan-2: 166, 226, 255;
+
+        /* фон и поверхности */
+        --bg: 9, 7, 17;                 /* фон под страницей */
+        --page: 14, 11, 23;             /* колонка страницы .l-page */
+        --panel: 18, 16, 29;            /* выпадающие списки, поиск */
+        --panel-2: 24, 19, 39;          /* вторая ступень панелей */
+        --surface: 21, 17, 32;          /* окна, подсказки, карточки */
+        --field: 14, 11, 23;            /* поля ввода */
+        --deep: 11, 9, 18;              /* самое тёмное: код, полосы шкал */
+        --line-tint: 184, 160, 255;     /* оттенок рамок и разделителей */
+        --shade: 0, 0, 0;               /* тени */
+
+        /* обои (необязательно): url("…"); или none */
+        --bg-image: none;
+        --bg-dim: .55;                  /* затемнение обоев: 0 — нет, 1 — совсем тёмные */
+
+        /* текст */
+        --text: 226, 220, 240;          /* основной */
+        --text-2: 187, 177, 203;        /* второстепенный */
+        --text-3: 143, 134, 157;        /* приглушённый: даты, подписи */
+        --text-4: 103, 96, 114;         /* самый тусклый: недоступное, плейсхолдеры */
+        --text-strong: 243, 237, 255;   /* самый яркий: текст под курсором */
+
+        /* статусы */
+        --green: 120, 201, 140;
+        --red: 227, 110, 124;
+        --yellow: 227, 191, 114;
+        --stars: 116, 175, 226;         /* звёзды оценки */
+    }
+}
+
+/* родные переменные шикимори: многие компоненты сайта берут цвет из них сами */
+@media screen and (min-width: 1px) {
+    html:root {
+        --icon-color: rgb(var(--accent-2));
+        --link-color: rgb(var(--link));
+        --link-hover-color: rgb(var(--warm));
+        --link-active-color: rgb(var(--warm-2));
+
+        --link-border-color: rgba(var(--link), .25);
+        --link-border-hover-color: rgba(var(--warm), .35);
+        --link-border-active-color: rgba(var(--warm-2), .4);
+
+        --headline-color: rgb(var(--lilac));
+        --headline-background-color: color-mix(in srgb, rgb(var(--accent)) 14%, rgb(var(--panel)));
+        --headline-border-color: rgb(var(--lamp));
+        --headline-arrow-color: rgb(var(--warm));
+
+        color-scheme: dark;
+    }
+}
+
+/* ===== tokens/components =====
+   токены компонентов: общие значения рамок, панелей, кнопок, чипов, полей и строк списков.
+   всё считается из палитры (tokens/palette.css) — меняется в одном месте.
+   свои значения можно задать в site.css внутри html:root { … }. */
+
+@media screen and (min-width: 1px) {
+    html:root {
+        /* рамки и разделители */
+        --line-faint: rgba(var(--line-tint), .07);
+        --line-soft: rgba(var(--line-tint), .1);
+        --line: rgba(var(--line-tint), .14);
+        --line-2: rgba(var(--line-tint), .28);
+
+        /* промежуточный текст между основным и второстепенным */
+        --text-mid: color-mix(in srgb, rgb(var(--text)) 50%, rgb(var(--text-2)));
+
+        /* панели: окна, подсказки, выпадающие списки */
+        --plate-bg: rgb(var(--surface));
+        --plate-border: var(--line-2);
+        --plate-shadow: 0 14px 35px rgba(var(--shade), .6);
+        --drop-bg: rgb(var(--panel));
+        --drop-shadow: 0 12px 28px rgba(var(--shade), .6);
+        --plate-radius: 4px;
+
+        /* заголовки .headline / .midheadline / .subheadline */
+        --heading-bg: linear-gradient(90deg,
+            color-mix(in srgb, rgb(var(--accent)) 25%, rgb(var(--panel))),
+            rgb(var(--panel-2)) 58%,
+            rgb(var(--panel)));
+        --heading-text: rgb(var(--lilac));
+        --heading-mark: rgb(var(--lamp));
+        --heading-dot: rgb(var(--warm));
+
+        /* кнопки */
+        --btn-bg: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 25%, rgb(var(--panel))),
+            color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--panel))));
+        --btn-bg-hover: color-mix(in srgb, rgb(var(--accent)) 35%, rgb(var(--panel)));
+        --btn-bg-active: color-mix(in srgb, rgb(var(--accent)) 45%, rgb(var(--panel)));
+        --btn-text: color-mix(in srgb, rgb(var(--lilac)) 85%, rgb(var(--text-2)));
+        --btn-text-hover: rgb(var(--warm-2));
+        --btn-border: rgba(var(--line-tint), .22);
+        --btn-border-hover: rgba(var(--warm), .42);
+
+        /* чипы: теги, «показать ещё», мелкие кнопки */
+        --chip-bg: color-mix(in srgb, rgb(var(--accent)) 14%, rgb(var(--panel)));
+        --chip-bg-hover: color-mix(in srgb, rgb(var(--accent)) 24%, rgb(var(--panel)));
+        --chip-text: color-mix(in srgb, rgb(var(--accent-2)) 60%, rgb(var(--lilac)));
+        --chip-text-hover: rgb(var(--warm-2));
+        --chip-border: rgba(var(--line-tint), .16);
+        --chip-border-hover: rgba(var(--warm), .34);
+
+        /* поля ввода */
+        --field-bg: rgb(var(--field));
+        --field-text: rgb(var(--text));
+        --field-border: rgba(var(--line-tint), .19);
+        --field-focus: rgba(var(--cyan), .42);
+        --field-focus-glow: 0 0 7px rgba(var(--cyan), .08);
+        --field-placeholder: rgb(var(--text-4));
+
+        /* строки списков: меню, поиск, выпадающие списки */
+        --row-hover: rgba(var(--accent), .22);
+        --row-active: rgba(var(--accent), .3);
+        --row-mark: inset 2px 0 0 rgb(var(--accent-2));
+        --row-fade: linear-gradient(90deg, rgba(var(--accent), .24), rgba(var(--accent), .04), transparent);
+
+        /* шкалы */
+        --bar-1: linear-gradient(90deg,
+            color-mix(in srgb, rgb(var(--accent)) 80%, black),
+            color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--accent-2))),
+            rgb(var(--accent-2)));
+        --bar-2: linear-gradient(90deg,
+            color-mix(in srgb, rgb(var(--cyan)) 50%, black),
+            color-mix(in srgb, rgb(var(--cyan)) 80%, black),
+            rgb(var(--cyan-2)));
+
+        /* анимации наведения */
+        --ease-fast: .15s ease;
+    }
+}
+
+/* ===== base/base =====
+   текст, ссылки, таблицы, выделение, полосы прокрутки */
+
+@media screen and (min-width: 1px) {
+    body,
+    input,
+    textarea,
+    select,
+    button {
+        color: rgb(var(--text));
+    }
+
+    a,
+    .b-link,
+    .b-js-link {
+        color: var(--link-color);
+        transition: color var(--ease-fast);
+    }
+
+    a:active,
+    .b-link:active,
+    .b-js-link:active {
+        color: var(--link-active-color);
+    }
+
+    header.head h1,
+    header.head h2,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    header.head .notice,
+    header.head .misc,
+    header.head a.edit,
+    .b-nothing_here,
+    .date,
+    .misc,
+    .notice {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-text_with_paragraphs,
+    .b-prgrph,
+    .b-entry-info,
+    .b-source,
+    .b-list,
+    .b-table {
+        color: rgb(var(--text-2));
+    }
+
+    /* таблицы */
+    .b-table,
+    table {
+        color: rgb(var(--text-2));
+    }
+
+    .b-table tr,
+    .b-table td,
+    .b-table th,
+    table tr,
+    table td,
+    table th {
+        border-color: rgba(var(--line-tint), .09) !important;
+    }
+
+    .b-table th,
+    table th {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    /* выделение и прокрутка */
+    ::selection {
+        color: #fff;
+        background: rgba(var(--accent), .68);
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgb(var(--deep));
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 75%, black),
+            color-mix(in srgb, rgb(var(--accent)) 35%, rgb(var(--bg))));
+        border: 2px solid rgb(var(--deep));
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    a:hover,
+    .b-link:hover,
+    .b-js-link:hover {
+        color: var(--link-hover-color);
+    }
+
+    .b-table tr:hover,
+    table tbody tr:hover {
+        background: rgba(var(--accent), .05);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgb(var(--accent-2));
+    }
+}
+
+/* ===== layout/page =====
+   фон страницы (сумеречное небо или свои обои), колонка .l-page */
+
+@media screen and (min-width: 1px) {
+    /* фон — на html, body прозрачный: иначе фон body закрывает body::before с отрицательным z-index */
+    html {
+        background: rgb(var(--bg)) !important;
+    }
+
+    body {
+        position: relative;
+        background: transparent !important;
+        color: rgb(var(--text)) !important;
+    }
+
+    /* небо: затемнение обоев → обои (если заданы) → сумеречные пятна света */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        pointer-events: none;
+        background:
+            linear-gradient(rgba(var(--bg), var(--bg-dim)), rgba(var(--bg), var(--bg-dim))),
+            var(--bg-image) center / cover no-repeat,
+            radial-gradient(circle at 72% 24%, rgba(var(--lilac), .12), transparent 25%),
+            radial-gradient(circle at 35% 34%, rgba(var(--cyan), .08), transparent 22%),
+            radial-gradient(circle at 64% 78%, rgba(var(--accent-2), .07), transparent 24%),
+            radial-gradient(circle at 81% 10%, rgba(var(--warm), .08), transparent 9%),
+            linear-gradient(120deg,
+                color-mix(in srgb, rgb(var(--accent)) 8%, rgb(var(--bg))),
+                color-mix(in srgb, rgb(var(--cyan)) 5%, rgb(var(--bg))) 55%,
+                rgb(var(--bg)));
+    }
+
+    /* виньетка */
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -9;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 42%, rgba(var(--shade), .48));
+    }
+
+    .l-page {
+        background: linear-gradient(180deg, rgba(var(--page), .97), rgba(var(--bg), .985)) !important;
+        color: rgb(var(--text));
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        box-shadow: 0 0 70px rgba(var(--shade), .72);
+    }
+
+    .l-content,
+    .l-menu,
+    .block,
+    .b-block {
+        color: rgb(var(--text));
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 767px) {
+    .l-page {
+        border-left: 0;
+        border-right: 0;
+        box-shadow: none;
+    }
+}
+
+/* ===== layout/header =====
+   верхнее меню, его выпадающие списки, глобальный поиск и подсказки автодополнения.
+   размеры и положение меню оставлены сайту — меняются только цвета. */
+
+@media screen and (min-width: 1px) {
+    .l-top_menu-v2 {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 8%, rgb(var(--panel))),
+            rgb(var(--page))) !important;
+        color: rgb(var(--text)) !important;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 4px 18px rgba(var(--shade), .45);
+    }
+
+    .l-top_menu-v2 a,
+    .l-top_menu-v2 .menu-dropdown > span,
+    .l-top_menu-v2 .menu-dropdown > a {
+        color: rgb(var(--text)) !important;
+    }
+
+    .l-top_menu-v2 .menu-dropdown.active > span {
+        background: rgba(var(--accent), .12) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .l-top_menu-v2 .submenu {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--panel))),
+            rgb(var(--field))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        border-top: 2px solid color-mix(in srgb, rgb(var(--accent)) 85%, black) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .l-top_menu-v2 .submenu > .inner {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .l-top_menu-v2 .submenu .legend,
+    .l-top_menu-v2 .submenu .title,
+    .l-top_menu-v2 .submenu header,
+    .l-top_menu-v2 .submenu .menu-section {
+        color: color-mix(in srgb, rgb(var(--text-2)) 60%, rgb(var(--text-3))) !important;
+        background: transparent !important;
+        border-color: var(--line-faint) !important;
+    }
+
+    .l-top_menu-v2 .submenu > a,
+    .l-top_menu-v2 .submenu a {
+        background: transparent !important;
+        color: var(--text-mid) !important;
+        border-color: transparent !important;
+    }
+
+    .l-top_menu-v2 .submenu a:active {
+        background: var(--row-fade) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .l-top_menu-v2 .submenu a::before,
+    .l-top_menu-v2 .submenu .icon {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    /* поиск */
+    .l-top_menu-v2 .global-search input,
+    .b-main_search .input,
+    .b-main_search .input input {
+        background: rgb(var(--deep)) !important;
+        color: var(--field-text) !important;
+        border-color: rgba(var(--cyan), .22) !important;
+    }
+
+    .l-top_menu-v2 .global-search input:focus,
+    .b-main_search .input:focus-within {
+        border-color: rgba(var(--accent-2), .52) !important;
+        box-shadow: 0 0 8px rgba(var(--accent), .15);
+    }
+
+    .l-top_menu-v2 .global-search input::placeholder,
+    .b-main_search input::placeholder {
+        color: var(--field-placeholder) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results,
+    .b-main_search ul.popup,
+    .ac_results,
+    .completable-block.menu-suggest {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results > *,
+    .b-main_search ul.popup li,
+    .ac_results li {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .active,
+    .b-main_search ul.popup li.active,
+    .ac_over {
+        background: var(--row-hover) !important;
+        color: #fff !important;
+    }
+
+    .ac_odd {
+        background: rgba(255, 255, 255, .018) !important;
+    }
+
+    .ac_results .name,
+    .ac_results .name a {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .ac_results .name > strong {
+        background: rgba(var(--warm), .22) !important;
+        color: rgb(var(--warm-2)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .l-top_menu-v2 .menu-dropdown:hover > span,
+    .l-top_menu-v2 .menu-dropdown:hover > a {
+        background: rgba(var(--accent), .12) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .l-top_menu-v2 .submenu > a:hover,
+    .l-top_menu-v2 .submenu a:hover {
+        background: var(--row-fade) !important;
+        color: rgb(var(--text-strong)) !important;
+        box-shadow: var(--row-mark);
+    }
+
+    .l-top_menu-v2 .global-search .search-results > *:hover,
+    .b-main_search ul.popup li:hover {
+        background: var(--row-hover) !important;
+        color: #fff !important;
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 1023px) {
+    .l-top_menu-v2 .submenu {
+        box-shadow: none !important;
+    }
+}
+
+/* ===== components/headings =====
+   заголовки блоков .headline / .midheadline / .subheadline; исходные размеры сохранены */
+
+@media screen and (min-width: 1px) {
+    .headline,
+    .midheadline,
+    .subheadline {
+        position: relative;
+        overflow: hidden;
+        background: var(--heading-bg) !important;
+        color: var(--heading-text) !important;
+        border-left-color: var(--heading-mark) !important;
+        border-bottom: 1px solid rgba(var(--line-tint), .12);
+        box-shadow: inset 0 0 10px rgba(var(--shade), .24);
+        text-shadow: 0 1px 2px rgba(var(--shade), .55);
+    }
+
+    .headline {
+        padding-top: 4px !important;
+        padding-bottom: 2px !important;
+    }
+
+    .midheadline,
+    .subheadline {
+        line-height: 30px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .headline > a,
+    .midheadline > a,
+    .subheadline > a {
+        color: inherit !important;
+    }
+
+    .headline > a::before,
+    .midheadline > a::before,
+    .subheadline > a::before {
+        color: var(--heading-dot) !important;
+    }
+
+    .headline .misc-links,
+    .subheadline .misc-link {
+        color: rgb(var(--text-2)) !important;
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 767px) {
+    .headline,
+    .midheadline,
+    .subheadline {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+}
+
+/* ===== components/buttons =====
+   кнопки сайта и чипы «показать ещё» */
+
+@media screen and (min-width: 1px) {
+    .b-button,
+    .b-link_button,
+    button,
+    input[type="submit"],
+    input[type="button"],
+    .button {
+        background: var(--btn-bg) !important;
+        color: var(--btn-text) !important;
+        border: 1px solid var(--btn-border) !important;
+        box-shadow: none;
+        transition: background-color var(--ease-fast), border-color var(--ease-fast), color var(--ease-fast);
+    }
+
+    .b-button:active,
+    .b-link_button:active,
+    button:active,
+    input[type="submit"]:active,
+    input[type="button"]:active {
+        background: var(--btn-bg-active) !important;
+        color: var(--btn-text-hover) !important;
+    }
+
+    .b-comments .comments-loader,
+    .b-comments .comments-hider,
+    .b-comments .comments-collapser,
+    .b-show_more,
+    .b-show_more-more {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-comments .comments-loader:active,
+    .b-show_more:active,
+    .b-show_more-more:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-button:hover,
+    .b-link_button:hover,
+    button:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    .button:hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+        border-color: var(--btn-border-hover) !important;
+    }
+
+    .b-comments .comments-loader:hover,
+    .b-show_more:hover,
+    .b-show_more-more:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}
+
+/* ===== components/forms =====
+   поля ввода, галочки, подписи форм, ошибки */
+
+@media screen and (min-width: 1px) {
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="url"],
+    textarea,
+    select,
+    .b-input input,
+    .b-input textarea {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus,
+    .b-input input:focus,
+    .b-input textarea:focus {
+        border-color: var(--field-focus) !important;
+        box-shadow: var(--field-focus-glow);
+        outline: none !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: var(--field-placeholder) !important;
+    }
+
+    select option {
+        background: var(--plate-bg);
+        color: rgb(var(--text));
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        accent-color: rgb(var(--accent));
+    }
+
+    .b-checkbox label,
+    .b-radio label,
+    .b-form label,
+    .b-form .variants,
+    .b-form .actions,
+    .b-input,
+    .b-input .hint {
+        color: rgb(var(--text-2));
+    }
+
+    .b-errors,
+    .b-errors .subheadline {
+        color: color-mix(in srgb, rgb(var(--red)) 55%, white) !important;
+    }
+
+    .b-errors {
+        background: rgba(var(--red), .1) !important;
+        border-color: rgba(var(--red), .32) !important;
+    }
+}
+
+/* ===== components/modals =====
+   окна, всплывающие панели, подсказки, уведомления и предупреждения */
+
+@media screen and (min-width: 1px) {
+    .b-modal > .inner,
+    .popup,
+    .b-popup,
+    .dropdown,
+    .tooltip-inner,
+    .tipsy-inner {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text)) !important;
+        border-color: var(--plate-border) !important;
+        box-shadow: var(--plate-shadow);
+    }
+
+    .tipsy {
+        pointer-events: none;
+    }
+
+    .b-shade {
+        background: rgba(var(--bg), .72) !important;
+    }
+
+    .tooltip-inner .close {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    /* опросы, вопросы, уведомления */
+    .b-poll,
+    .b-question,
+    .b-notice,
+    .b-warning {
+        background: color-mix(in srgb, rgb(var(--accent)) 5%, rgb(var(--surface))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-warning {
+        border-left-color: rgb(var(--warm)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .tooltip-inner .close:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 1023px) {
+    .b-modal > .inner {
+        background: var(--plate-bg) !important;
+    }
+}
+
+/* ===== components/badges =====
+   теги, метки статуса, маркеры «новое», «оффтоп», «спойлер» */
+
+@media screen and (min-width: 1px) {
+    .b-tag,
+    .b-entry-info .line .b-tag,
+    .b-catalog_entry-tooltip .tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+        transition: background-color var(--ease-fast), color var(--ease-fast), border-color var(--ease-fast);
+    }
+
+    .b-tag:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+
+    .b-anime_status_tag,
+    .b-badge,
+    .b-new_marker,
+    .b-summary_marker,
+    .b-offtopic_marker,
+    .b-broadcast_marker,
+    .b-spoiler_marker {
+        filter: saturate(.78) brightness(.92);
+    }
+
+    .b-new_marker {
+        color: rgb(var(--cyan-2)) !important;
+    }
+
+    .b-offtopic_marker {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-spoiler_marker {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-tag:hover,
+    .b-entry-info .line .b-tag:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+        border-color: var(--chip-border-hover) !important;
+    }
+}
+
+/* ===== components/cards =====
+   карточки каталога .b-catalog_entry, постеры, подсказка карточки */
+
+@media screen and (min-width: 1px) {
+    .b-catalog_entry {
+        color: rgb(var(--text));
+    }
+
+    .b-catalog_entry .cover {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-catalog_entry .cover .title,
+    .b-catalog_entry .cover .title a {
+        color: rgb(var(--accent-2)) !important;
+        transition: color var(--ease-fast);
+    }
+
+    .b-catalog_entry .cover .misc,
+    .b-catalog_entry .cover .misc span {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-catalog_entry .cover .misc span.relation {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-catalog_entry .image-decor,
+    .b-db_entry-poster,
+    .c-poster img,
+    .b-poster img {
+        border-color: var(--line-2) !important;
+        transition: box-shadow var(--ease-fast);
+    }
+
+    .b-catalog_entry-tooltip .inner {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--plate-border) !important;
+    }
+
+    .b-catalog_entry-tooltip .inner .line .key {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-catalog_entry-tooltip .inner .line .value {
+        color: rgb(var(--text)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-catalog_entry .cover:hover .title,
+    .b-catalog_entry .cover .title:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .b-catalog_entry .image-decor:hover,
+    .c-poster img:hover {
+        box-shadow: 0 0 14px rgba(var(--accent-2), .12);
+    }
+}
+
+/* ===== components/stats =====
+   оценка (звёзды), блок «мой список» на странице тайтла, шкалы статистики */
+
+@media screen and (min-width: 1px) {
+    .b-rate {
+        color: rgb(var(--text-2));
+    }
+
+    .b-rate .stars,
+    .b-rate .stars.score,
+    .b-rate .stars.hover {
+        color: rgb(var(--stars)) !important;
+    }
+
+    .b-rate .score-value {
+        color: rgb(var(--text)) !important;
+    }
+
+    .b-rate .score-notice {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-user_rate {
+        color: rgb(var(--text-2));
+    }
+
+    .b-user_rate .rate-show,
+    .b-user_rate .rate-edit {
+        background: transparent !important;
+    }
+
+    .b-user_rate .rate-show .note,
+    .b-user_rate .rate-edit .note {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-stats_bar .title {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .b-stats_bar .bar {
+        background: rgb(var(--deep)) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    .b-stats_bar .bar .first {
+        background: var(--bar-1) !important;
+    }
+
+    .b-stats_bar .bar .second {
+        background: var(--bar-2) !important;
+    }
+
+    .b-stats_bar .stat_names,
+    .b-stats_bar .stat_names * {
+        color: rgb(var(--text-2)) !important;
+    }
+}
+
+/* ===== components/users =====
+   пользователи, клубы, коллекции, фильтры коллекций */
+
+@media screen and (min-width: 1px) {
+    .b-collection-topic,
+    .b-club,
+    .b-user,
+    .b-user.detailed,
+    .b-user.named_avatar {
+        color: rgb(var(--text-2));
+    }
+
+    .b-club .name,
+    .b-user .name,
+    .b-user.detailed .info .image-name,
+    .b-user.named_avatar .name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-club .info,
+    .b-user.detailed .history,
+    .b-user_history-line {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-collection_search .field input {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-collection-filters .block,
+    .b-header_filters {
+        color: rgb(var(--text-2));
+    }
+
+    .b-header_filters .filter-line,
+    .b-collection-filters .block > .filter {
+        border-color: var(--line) !important;
+    }
+}
+
+/* ===== components/comments =====
+   комментарии, сообщения, диалоги */
+
+@media screen and (min-width: 1px) {
+    .b-comment,
+    .b-message,
+    .b-dialog {
+        color: rgb(var(--text-2));
+        border-color: var(--line) !important;
+    }
+
+    .b-comment > .inner,
+    .b-message > .inner,
+    .b-dialog > .inner {
+        background: transparent !important;
+    }
+
+    .b-comment > .inner header .name-date a.name,
+    .b-message > .inner header .name-date a.name,
+    .b-dialog > .inner header .name-date a.name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-comment > .inner header .name-date .time,
+    .b-message > .inner header .name-date .time,
+    .b-dialog > .inner header .name-date .time,
+    .b-comment-info {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-comment .body,
+    .b-message .body,
+    .b-dialog .body {
+        color: rgb(var(--text-2));
+    }
+}
+
+/* ===== components/editor =====
+   редактор, спойлеры, цитаты, код, загрузка картинок */
+
+@media screen and (min-width: 1px) {
+    .b-shiki_editor,
+    .b-shiki_editor .controls,
+    .b-shiki_editor .links,
+    .b-shiki_editor .images,
+    .b-shiki_editor .quotes,
+    .b-shiki_editor .upload {
+        color: rgb(var(--text-2));
+    }
+
+    .b-shiki_editor .body .editor textarea,
+    .b-shiki_editor .body .editor .prose-mirror,
+    .b-shiki_editor textarea,
+    .ProseMirror {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: rgba(var(--line-tint), .2) !important;
+    }
+
+    .b-shiki_editor .body .preview {
+        background: rgb(var(--panel)) !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-shiki_editor .controls a,
+    .b-shiki_editor .controls span,
+    .editor-controls > span {
+        color: color-mix(in srgb, rgb(var(--lilac)) 80%, rgb(var(--text-2))) !important;
+        transition: color var(--ease-fast);
+    }
+
+    .b-shiki_editor .link-value {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-shiki_editor footer {
+        color: rgb(var(--text-3));
+    }
+
+    /* спойлеры */
+    .b-spoiler,
+    .b-spoiler_block,
+    .b-spoiler_inline {
+        color: rgb(var(--text-2));
+    }
+
+    .b-spoiler label,
+    .b-spoiler_block > label {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-spoiler .content,
+    .b-spoiler_block .content {
+        background: rgba(var(--accent), .06) !important;
+        border-color: rgba(var(--accent-2), .23) !important;
+    }
+
+    /* цитаты и код */
+    .b-quote,
+    .b-quote-v2,
+    blockquote {
+        background: rgba(var(--accent), .07) !important;
+        color: var(--text-mid) !important;
+        border-color: rgba(var(--accent-2), .35) !important;
+    }
+
+    .b-code-v2,
+    pre,
+    code {
+        background: rgb(var(--deep)) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 80%, rgb(var(--text-2))) !important;
+        border-color: var(--line) !important;
+    }
+
+    /* галерея и загрузка */
+    .b-gallery,
+    .b-image,
+    .b-dropzone {
+        color: rgb(var(--text-2));
+    }
+
+    .b-dropzone {
+        background: rgba(var(--accent), .05) !important;
+        border-color: rgba(var(--accent-2), .28) !important;
+    }
+
+    .b-upload_progress {
+        background: var(--plate-bg) !important;
+        border-color: var(--line) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-shiki_editor .controls a:hover,
+    .editor-controls > span:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+/* ===== components/pagination =====
+   постраничная навигация и плавающие переключатели .b-options-floated */
+
+@media screen and (min-width: 1px) {
+    .b-pages,
+    .pagination {
+        color: rgb(var(--text-3));
+    }
+
+    .b-pages a,
+    .pagination a,
+    .pagination .link {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-pages .current,
+    .pagination .current,
+    .pagination .active {
+        color: #fff !important;
+    }
+
+    .b-options-floated a,
+    .b-options-floated span {
+        color: rgb(var(--text-2));
+    }
+
+    .b-options-floated a.selected {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-pages a:hover,
+    .pagination a:hover,
+    .pagination .link:hover,
+    .b-options-floated a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+/* ===== pages/anime =====
+   страница аниме / манги / ранобэ: информация, кнопки «смотреть», видео, плеер и выбор источника */
+
+@media screen and (min-width: 1px) {
+    .b-db_entry {
+        color: rgb(var(--text));
+    }
+
+    .b-db_entry > .c-about,
+    .b-db_entry > .c-image {
+        color: rgb(var(--text-2));
+    }
+
+    .b-entry-info .line .key {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-entry-info .line .value,
+    .b-entry-info .line .value * {
+        color: rgb(var(--text-2));
+    }
+
+    .b-entry-info .line .value a {
+        color: rgb(var(--accent-2));
+    }
+
+    .p-animes-show .watch-online,
+    .p-animes-show .upload-video,
+    .p-mangas-show .watch-online,
+    .p-mangas-show .upload-video {
+        background: var(--btn-bg) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: 0 0 14px rgba(var(--cyan), .09);
+    }
+
+    /* видео и старый плеер */
+    .b-video .video-link {
+        background: rgb(var(--deep)) !important;
+    }
+
+    .b-video_player,
+    .b-video_player .player-area,
+    .p-anime_videos-index .c-videos {
+        background: rgb(var(--page)) !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-video_player .cc-player_controls {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 24%, rgb(var(--panel))),
+            rgb(var(--panel-2))) !important;
+        color: rgb(var(--text)) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-video_player .cc-player_controls .c-control,
+    .b-video_player .cc-player_controls .episode-title,
+    .b-video_player .cc-player_controls .episode-num {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-video_player .cc-player_controls .c-control.selected {
+        background: rgba(var(--accent), .18) !important;
+        color: #fff !important;
+    }
+
+    .b-video_player .cc-player_controls .c-control .icon {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-video_player .cc-player_controls .episode-num input {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-video_variant,
+    .p-anime_videos-index .c-videos .video-variant-switcher {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-video_variant.active,
+    .p-anime_videos-index .c-videos .video-variant-switcher.active {
+        background: rgba(var(--accent), .25) !important;
+        box-shadow: inset 3px 0 0 rgb(var(--cyan));
+    }
+
+    /* выбор источника в новом плеере */
+    .player-dropdown__list {
+        background: rgb(var(--field)) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid rgba(var(--line-tint), .2) !important;
+        border-radius: var(--plate-radius) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row {
+        background: var(--plate-bg) !important;
+        color: var(--text-mid) !important;
+        border-color: var(--line-faint) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row:nth-child(even) {
+        background: rgb(var(--field)) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row:is(.active, .selected, [aria-selected="true"]) {
+        background: var(--row-active) !important;
+        color: rgb(var(--lilac)) !important;
+        box-shadow: inset 3px 0 0 rgb(var(--accent-2)) !important;
+    }
+
+    .player-dropdown__cell {
+        color: rgb(var(--text-2)) !important;
+        border-color: rgba(var(--line-tint), .08) !important;
+    }
+
+    .player-dropdown__cell--name {
+        color: color-mix(in srgb, rgb(var(--text)) 80%, rgb(var(--text-2))) !important;
+    }
+
+    .player-dropdown__cell--episodes {
+        color: rgb(var(--link)) !important;
+    }
+
+    .player-dropdown__caret {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .player-dropdown__trigger {
+        background: linear-gradient(180deg, var(--chip-bg), var(--plate-bg)) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--text-2))) !important;
+        border: 1px solid rgba(var(--line-tint), .2) !important;
+        box-shadow: none !important;
+    }
+
+    .player-dropdown__trigger[aria-expanded="true"] {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--accent-2), .38) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-video_player .cc-player_controls .c-control:hover {
+        background: rgba(var(--accent), .18) !important;
+        color: #fff !important;
+    }
+
+    .b-video_variant:hover,
+    .p-anime_videos-index .c-videos .video-variant-switcher:hover {
+        background: rgba(var(--accent), .18) !important;
+    }
+
+    .player-dropdown__list .player-dropdown__row:hover {
+        background: rgba(var(--accent), .24) !important;
+    }
+
+    .player-dropdown__row:hover .player-dropdown__cell {
+        color: rgb(var(--text)) !important;
+    }
+
+    .player-dropdown__trigger:hover {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--accent-2), .38) !important;
+    }
+}
+
+/* ===== pages/forum =====
+   топики, форум, голосование, рецензии и отзывы */
+
+@media screen and (min-width: 1px) {
+    .b-topic,
+    .b-forum,
+    .b-forums .forum,
+    .b-topic-preview,
+    .b-topic-minified {
+        color: rgb(var(--text-2));
+        border-color: var(--line) !important;
+    }
+
+    .b-topic > .inner header .name-date a.name,
+    .b-topic-preview .name,
+    .b-forum .name,
+    .b-forums .forum .name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-topic .about,
+    .b-topic .about > span,
+    .b-forum .topics,
+    .b-forums .forum .topics {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-topic .footer-vote,
+    .b-footer_vote {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-topic .footer-vote .vote-group .vote,
+    .b-footer_vote .vote {
+        background: var(--chip-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    /* рецензии и отзывы */
+    .b-review-topic,
+    .b-critique-topic {
+        color: rgb(var(--text-2));
+        border-color: var(--line) !important;
+    }
+
+    .b-review-topic .name-date .name,
+    .b-review-topic .name-date .name a,
+    .b-critique-topic .name-date .name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-review-topic .body,
+    .b-review-topic .body *,
+    .b-critique-topic .body {
+        color: rgb(var(--text-2));
+    }
+
+    .b-review_votes,
+    .b-critique_votes {
+        color: rgb(var(--text-3));
+    }
+
+    .b-review_votes .votes-for,
+    .b-critique_votes .votes-for {
+        color: rgb(var(--green)) !important;
+    }
+
+    .b-review_votes .votes-against,
+    .b-critique_votes .votes-against {
+        color: rgb(var(--red)) !important;
+    }
+
+    .b-reviews_navigation .navigation-container {
+        color: rgb(var(--text-2));
+    }
+
+    .b-reviews_navigation .navigation-node {
+        background: color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))) !important;
+        color: var(--text-mid) !important;
+        border-color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--bg))) !important;
+    }
+
+    .b-reviews_navigation .navigation-node.is-active {
+        background: var(--chip-bg-hover) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: rgb(var(--warm)) !important;
+    }
+
+    .b-reviews_navigation .navigation-node-positive {
+        border-color: color-mix(in srgb, rgb(var(--green)) 65%, rgb(var(--bg))) !important;
+    }
+
+    .b-reviews_navigation .navigation-node-neutral {
+        border-color: color-mix(in srgb, rgb(var(--cyan)) 55%, rgb(var(--bg))) !important;
+    }
+
+    .b-reviews_navigation .navigation-node-negative {
+        border-color: color-mix(in srgb, rgb(var(--red)) 60%, rgb(var(--bg))) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-reviews_navigation .navigation-node:hover {
+        background: color-mix(in srgb, rgb(var(--accent)) 14%, rgb(var(--surface))) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+}
+
+/* ===== pages/profile =====
+   шапка профиля, аватар, история, блоки друзей / клубов / избранного */
+
+@media screen and (min-width: 1px) {
+    .p-profiles .profile-head {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        background: linear-gradient(90deg,
+            color-mix(in srgb, color-mix(in srgb, rgb(var(--accent)) 30%, rgb(var(--bg))) 78%, transparent),
+            rgba(var(--panel), .91) 35%,
+            rgba(var(--panel), .91) 66%,
+            color-mix(in srgb, color-mix(in srgb, rgb(var(--cyan)) 18%, rgb(var(--bg))) 72%, transparent)) !important;
+        border: 1px solid var(--line-2);
+        border-top: 2px solid rgba(var(--warm), .48);
+        box-shadow:
+            inset 0 0 50px rgba(var(--shade), .48),
+            0 8px 25px rgba(var(--shade), .42);
+    }
+
+    .p-profiles .profile-head::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(circle at 76% 30%, rgba(var(--lilac), .12), transparent 23%),
+            radial-gradient(circle at 34% 37%, rgba(var(--cyan), .07), transparent 21%);
+    }
+
+    .p-profiles .profile-head > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .p-profiles .profile-head h1,
+    .p-profiles .profile-head .name {
+        color: rgb(var(--lilac)) !important;
+        text-shadow: 0 2px 4px rgba(var(--shade), .72);
+    }
+
+    .p-profiles .profile-head .c-info,
+    .p-profiles .profile-head .c-info *,
+    .p-profiles .profile-head .notice,
+    .p-profiles .profile-head .misc {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .p-profiles .profile-head .avatar img,
+    .p-profiles .profile-head img.avatar {
+        background: rgb(var(--deep)) !important;
+        border: 2px solid rgba(var(--accent-2), .54) !important;
+        box-shadow:
+            0 0 0 4px rgba(var(--panel), .88),
+            0 0 16px rgba(var(--accent-2), .12);
+    }
+
+    .p-profiles .profile-head .c-history {
+        background: rgba(var(--bg), .5) !important;
+        border-left-color: var(--line) !important;
+    }
+
+    .p-profiles .profile-head .c-history .entry {
+        border-color: var(--line) !important;
+    }
+
+    .p-profiles .cc-friends,
+    .p-profiles .cc-clubs,
+    .p-profiles .cc-favourites {
+        background: rgba(var(--page), .35);
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 767px) {
+    .p-profiles .profile-head {
+        box-shadow: inset 0 0 34px rgba(var(--shade), .42);
+    }
+}
+
+/* ===== pages/dashboard =====
+   главная: горячие темы, новости, «мой список», топ отзывов */
+
+@media screen and (min-width: 1px) {
+    .p-dashboards-show .b-hot_topics-v2,
+    .p-dashboards-show .b-forums,
+    .p-dashboards-show .b-news_line-topic,
+    .p-dashboards-show .b-news_wall-topic {
+        color: rgb(var(--text-2));
+    }
+
+    .p-dashboards-show .b-link_button,
+    .p-dashboards-show .b-tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--line) !important;
+    }
+
+    /* «мой список»: убрать светлую карточку сайта */
+    .p-dashboards-show .v2 .my-list {
+        background: linear-gradient(145deg, color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: rgba(var(--cyan), .24) !important;
+    }
+
+    .p-dashboards-show .v2 .my-list .label span,
+    .p-dashboards-show .v2 .my-list .entry .name,
+    .p-dashboards-show .v2 .my-list .entry .name a {
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--lilac))) !important;
+    }
+
+    .p-dashboards-show .v2 .my-list .entry,
+    .p-dashboards-show .v2 .my-list .entry .status,
+    .p-dashboards-show .v2 .my-list .entry .episodes,
+    .p-dashboards-show .v2 .my-list .entry .misc,
+    .p-dashboards-show .v2 .my-list .b-user_rate,
+    .p-dashboards-show .v2 .my-list .b-user_rate .rate-show,
+    .p-dashboards-show .v2 .my-list .b-user_rate .rate-edit,
+    .p-dashboards-show .v2 .my-list .b-user_rate .status,
+    .p-dashboards-show .v2 .my-list .b-user_rate .episodes,
+    .p-dashboards-show .v2 .my-list .b-nothing_here {
+        color: color-mix(in srgb, rgb(var(--text-2)) 60%, rgb(var(--text-3))) !important;
+    }
+
+    .p-dashboards-show .v2 .my-list .misc-links a {
+        color: color-mix(in srgb, rgb(var(--cyan)) 70%, rgb(var(--cyan-2))) !important;
+    }
+
+    /* топ отзывов: карточки остаются пастельными, поэтому текст в них тёмный (числами намеренно) */
+    .p-dashboards-show .review-slide,
+    .p-dashboards-show .review-slide .b-review-topic,
+    .p-dashboards-show .review-slide .b-review-topic .body,
+    .p-dashboards-show .review-slide .b-review-topic .body * {
+        color: #5b5365 !important;
+    }
+
+    .p-dashboards-show .review-slide .mini-review-author,
+    .p-dashboards-show .review-slide .about,
+    .p-dashboards-show .review-slide .about > span {
+        color: #514a59 !important;
+    }
+
+    .p-dashboards-show .review-slide .mini-review-eyebrow {
+        color: #756d7d !important;
+    }
+
+    .p-dashboards-show .review-slide .mini-review-title,
+    .p-dashboards-show .review-slide .b-review-topic .title,
+    .p-dashboards-show .review-slide .b-review-topic .title a,
+    .p-dashboards-show .review-slide .b-topic-preview .name {
+        color: #075f9b !important;
+    }
+
+    .p-dashboards-show .review-slide .b-review-topic .body a,
+    .p-dashboards-show .review-slide .b-review-topic .body .b-link {
+        color: #176a9d !important;
+    }
+
+    .p-dashboards-show .review-slide .b-height_shortener .expand,
+    .p-dashboards-show .review-slide .b-height_shortener .expand span {
+        color: #176a9d !important;
+        border-bottom-color: rgba(23, 106, 157, .32) !important;
+    }
+
+    .p-dashboards-show .review-slide.color-0 .b-height_shortener .shade {
+        background-image: linear-gradient(rgba(230, 244, 234, 0), #e6f4ea) !important;
+    }
+
+    .p-dashboards-show .review-slide.color-1 .b-height_shortener .shade {
+        background-image: linear-gradient(rgba(255, 248, 225, 0), #fff8e1) !important;
+    }
+
+    .p-dashboards-show .review-slide.color-2 .b-height_shortener .shade {
+        background-image: linear-gradient(rgba(255, 235, 238, 0), #ffebee) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .p-dashboards-show .b-link_button:hover,
+    .p-dashboards-show .b-tag:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}
+
+/* ===== pages/catalog =====
+   каталог аниме / манги / ранобэ: фильтры слева, выбор сезона и периода */
+
+@media screen and (min-width: 1px) {
+    .p-animes-index .l-menu,
+    .p-mangas-index .l-menu,
+    .p-ranobe-index .l-menu,
+    .p-recommendations-index .l-menu {
+        color: rgb(var(--text-2));
+    }
+
+    .p-animes-index .l-menu label,
+    .p-mangas-index .l-menu label,
+    .p-ranobe-index .l-menu label {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .p-animes-index .l-menu .disabled,
+    .p-mangas-index .l-menu .disabled,
+    .p-ranobe-index .l-menu .disabled {
+        color: rgb(var(--text-4)) !important;
+    }
+
+    /* сезон и период */
+    .season-selector-box {
+        position: relative;
+        padding: 10px 8px 8px !important;
+        background: linear-gradient(180deg, rgba(var(--panel-2), .96), rgba(var(--page), .98)) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: var(--plate-radius) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .018), 0 5px 15px rgba(var(--shade), .22) !important;
+    }
+
+    .season-selector-box .season-selector {
+        padding-bottom: 8px !important;
+        margin-bottom: 8px !important;
+        border-bottom: 1px solid rgba(var(--line-tint), .08) !important;
+    }
+
+    .season-selector-box .range-selector {
+        padding-top: 0 !important;
+    }
+
+    .season-selector-box .range-selector_label {
+        color: color-mix(in srgb, rgb(var(--text-3)) 80%, rgb(var(--text-2))) !important;
+        font-size: 12px !important;
+        text-shadow: none !important;
+    }
+
+    .season-selector-box .year-dropdown_trigger,
+    .season-selector-box .season-selector_season {
+        box-sizing: border-box !important;
+        background: linear-gradient(180deg, rgb(var(--surface)), rgb(var(--field))) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--text-2))) !important;
+        border: 1px solid rgba(var(--line-tint), .2) !important;
+        border-radius: 3px !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .018) !important;
+    }
+
+    .season-selector-box .year-dropdown_trigger *,
+    .season-selector-box .year-dropdown_trigger::before {
+        color: color-mix(in srgb, rgb(var(--text)) 85%, rgb(var(--text-2))) !important;
+    }
+
+    .season-selector-box .year-dropdown_trigger::after {
+        border-top-color: rgb(var(--text-3)) !important;
+    }
+
+    .season-selector-box .season-selector_season:focus-visible,
+    .season-selector-box .year-dropdown_trigger:focus-visible {
+        outline: 2px solid rgb(var(--cyan)) !important;
+        outline-offset: 2px;
+    }
+
+    .season-selector-box .season-selector_season option {
+        background: var(--plate-bg);
+        color: rgb(var(--text));
+    }
+
+    .season-selector-box .year-dropdown_list {
+        background: var(--plate-bg) !important;
+        color: var(--text-mid) !important;
+        border: 1px solid var(--line-2) !important;
+        border-radius: 3px !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .season-selector-box .year-dropdown_list li {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .season-selector-box .year-dropdown_list li.selected,
+    .season-selector-box .year-dropdown_list li.active {
+        background: var(--row-active) !important;
+        color: rgb(var(--lilac)) !important;
+        box-shadow: var(--row-mark) !important;
+    }
+
+    .season-selector-box .season-selector_add,
+    .season-selector-box .range-selector_apply {
+        background: var(--btn-bg) !important;
+        color: var(--btn-text) !important;
+        border: 1px solid var(--btn-border) !important;
+        border-radius: 3px !important;
+        text-decoration: none !important;
+        box-shadow: none !important;
+    }
+
+    .season-selector-box .season-selector_reset,
+    .season-selector-box .range-selector_reset {
+        color: rgb(var(--text-3)) !important;
+        text-decoration: none !important;
+    }
+
+    /* у компонента два варианта классов подсказки — в разных версиях сайта */
+    .season-selector-box .range-selector-box_hint,
+    .season-selector-box .range-selector_box_hint {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-3)) !important;
+        border: 1px solid var(--line) !important;
+        box-shadow: none !important;
+    }
+
+    .season-selector-box .range-selector-box_hint_popup,
+    .season-selector-box .range-selector_box_hint_popup {
+        background: var(--plate-bg) !important;
+        color: var(--text-mid) !important;
+        border: 1px solid var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .season-selector-box .year-dropdown:hover .year-dropdown_trigger,
+    .season-selector-box .season-selector_season:hover {
+        background: color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--surface))) !important;
+        border-color: rgba(var(--accent-2), .36) !important;
+    }
+
+    .season-selector-box .year-dropdown_list li:hover {
+        background: var(--row-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .season-selector-box .season-selector_add:hover,
+    .season-selector-box .range-selector_apply:hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+        border-color: var(--btn-border-hover) !important;
+    }
+
+    .season-selector-box .season-selector_reset:hover,
+    .season-selector-box .range-selector_reset:hover {
+        color: rgb(var(--link)) !important;
+    }
+}
+
+/* ===== pages/lists =====
+   списки пользователя (аниме / манга) */
+
+@media screen and (min-width: 1px) {
+    .p-user_rates-index .l-menu,
+    .p-user_rates-index .l-content {
+        color: rgb(var(--text-2));
+    }
+
+    .p-user_rates-index .stat-categories .category,
+    .p-user_rates-index .list-groups .summary,
+    .p-user_rates-index .list-lines tr {
+        border-color: var(--line) !important;
+    }
+
+    .p-user_rates-index .stat-categories .category.active {
+        background: rgba(var(--accent), .13) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .p-user_rates-index .list-lines tr.edit-form form {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .p-user_rates-index .stat-categories .category:hover {
+        background: rgba(var(--accent), .13) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+}
+
+/* ===== pages/achievements =====
+   достижения: названия, полосы прогресса */
+
+@media screen and (min-width: 1px) {
+    .b-achievement {
+        color: rgb(var(--text-2));
+    }
+
+    .b-achievement .c-about .title {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-achievement .c-about .progress {
+        background: rgb(var(--deep)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-achievement .c-about .progress .bar {
+        background: linear-gradient(90deg, rgb(var(--accent)), rgb(var(--cyan))) !important;
+    }
+
+    .b-achievement .c-about .hint {
+        color: rgb(var(--text-3)) !important;
+    }
+}
+
+/* ===== pages/moderation =====
+   модерация и правки: панели, опасные действия, редактируемая таблица */
+
+@media screen and (min-width: 1px) {
+    .b-admin_panel,
+    .p-moderations .l-content,
+    .p-moderations .l-menu,
+    .p-db_entries-edit,
+    .p-profiles-edit {
+        color: rgb(var(--text-2));
+    }
+
+    .b-admin_panel,
+    .b-dangerous-actions {
+        background: var(--plate-bg) !important;
+        border-color: var(--line-2) !important;
+    }
+
+    .b-dangerous-actions {
+        border-left-color: rgb(var(--red)) !important;
+    }
+
+    /* редактируемая таблица */
+    .b-table.b-editable_grid {
+        background: rgb(var(--page)) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    .b-table.b-editable_grid thead th {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 16%, rgb(var(--panel))),
+            color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--panel)))) !important;
+        color: color-mix(in srgb, rgb(var(--text)) 90%, rgb(var(--text-2))) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-table.b-editable_grid thead a,
+    .b-table.b-editable_grid thead .sort-possible {
+        color: color-mix(in srgb, rgb(var(--text)) 90%, rgb(var(--text-2))) !important;
+    }
+
+    .b-table.b-editable_grid tbody td {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-faint) !important;
+        text-shadow: none !important;
+    }
+
+    .b-table.b-editable_grid tbody tr:nth-child(even) td {
+        background: rgb(var(--field)) !important;
+    }
+
+    .b-table.b-editable_grid tbody td a {
+        color: color-mix(in srgb, rgb(var(--cyan)) 85%, rgb(var(--cyan-2))) !important;
+    }
+
+    .b-table.b-editable_grid tbody td:last-child {
+        color: var(--text-mid) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-table.b-editable_grid thead a:hover,
+    .b-table.b-editable_grid thead .sort-possible:hover,
+    .b-table.b-editable_grid tbody td a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .b-table.b-editable_grid tbody tr:hover td {
+        background: rgba(var(--accent), .14) !important;
+    }
+}
+
+/* ===== layout/footer =====
+   подвал и подпись «shiki dusk vX.Y.Z» (версия = тег релиза, ставит tools/build.py --version) */
+
+@media screen and (min-width: 1px) {
+    :root {
+        --theme-name: "shiki dusk";
+        --theme-version: "0.1.0";
+    }
+
+    .l-footer {
+        position: relative;
+        color: rgb(var(--text-3)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .l-footer a {
+        color: color-mix(in srgb, rgb(var(--link)) 75%, rgb(var(--text-3))) !important;
+    }
+
+    .l-footer::before {
+        content: var(--theme-name) " v" var(--theme-version);
+        position: absolute;
+        left: 5px;
+        bottom: 0;
+        z-index: 10;
+        white-space: pre;
+        color: rgba(var(--text-3), .6);
+        font-size: 10px;
+        font-weight: bold;
+        pointer-events: none;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .l-footer a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}
+
+/* ===== overrides/late =====
+   правила, которые обязаны идти после всех модулей: добивка светлых остатков сайта
+   и контрастные правки живых компонентов shikimori.rip. у каждого — откуда оно. */
+
+@media screen and (min-width: 1px) {
+    /* из components/modals, layout/header, components/editor, pages/lists:
+       известные контейнеры, у которых сайт оставляет светлый фон */
+    .b-modal > .inner,
+    .ac_results,
+    .completable-block.menu-suggest,
+    .b-main_search ul.popup,
+    .l-top_menu-v2 .global-search .search-results,
+    .b-shiki_editor .body .editor textarea,
+    .b-shiki_editor .body .editor .prose-mirror,
+    .p-user_rates-index .list-lines tr.edit-form form {
+        background-color: rgb(var(--panel)) !important;
+    }
+
+    .b-modal > .inner,
+    .ac_results,
+    .completable-block.menu-suggest,
+    .b-main_search ul.popup,
+    .l-top_menu-v2 .global-search .search-results {
+        color: rgb(var(--text)) !important;
+    }
+
+    /* из layout/header: строки результатов поиска лежат внутри .inner,
+       общее правило для прямых потомков до их текста не достаёт */
+    .l-top_menu-v2 .global-search .search-results .search-mode,
+    .l-top_menu-v2 .global-search .search-results .nothing_found,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .info {
+        color: var(--text-mid) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .search-mode.active,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item.active {
+        color: rgb(var(--text-strong)) !important;
+        background: linear-gradient(90deg, rgba(var(--accent), .24), rgba(var(--accent), .05)) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .name,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .name .b-link {
+        color: color-mix(in srgb, rgb(var(--lilac)) 85%, white) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .line .key {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .line .value,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item .b-separator {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results::before {
+        background: linear-gradient(0deg, rgba(var(--panel), 0), rgb(var(--panel))) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results::after {
+        background: linear-gradient(180deg, rgba(var(--panel), 0), rgb(var(--panel))) !important;
+    }
+
+    /* из base/base: заголовок топика и форума — сайт ставит цвет прямо на h1 */
+    .p-topics-show header.head h1,
+    .p-topics-show header.head h1 a,
+    .p-topics-show header.head h2,
+    .p-topics-show header.head h2 a,
+    .p-forums-show header.head h1,
+    .p-forums-show header.head h1 a {
+        color: color-mix(in srgb, rgb(var(--lilac)) 85%, rgb(var(--text-2))) !important;
+        text-shadow: 0 1px 2px rgba(var(--shade), .55);
+    }
+
+    /* из pages/moderation: карточки проектов (тело с заголовком, описанием и голосами) */
+    .body:has(> .title):has(> .description):has(> .votes) {
+        background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--accent)) 5%, rgb(var(--surface))), rgb(var(--page))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-top: 1px solid var(--line) !important;
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .title a {
+        color: color-mix(in srgb, rgb(var(--text)) 80%, rgb(var(--lilac))) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .description {
+        color: color-mix(in srgb, rgb(var(--text-2)) 50%, rgb(var(--text-3))) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .description a,
+    .body:has(> .title):has(> .description):has(> .votes) > .actions a {
+        color: rgb(var(--link)) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .votes .vote {
+        background: var(--btn-bg) !important;
+        color: var(--btn-text) !important;
+        border: 1px solid var(--btn-border) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .votes .vote:disabled {
+        background: rgb(var(--surface)) !important;
+        color: rgb(var(--text-3)) !important;
+        border-color: var(--line) !important;
+        opacity: .75 !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    /* из layout/header */
+    .l-top_menu-v2 .global-search .search-results .search-mode:hover,
+    .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item:hover {
+        color: rgb(var(--text-strong)) !important;
+        background: linear-gradient(90deg, rgba(var(--accent), .24), rgba(var(--accent), .05)) !important;
+    }
+
+    /* из pages/moderation */
+    .body:has(> .title):has(> .description):has(> .votes) > .votes .vote:not(:disabled):hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+        border-color: var(--btn-border-hover) !important;
+    }
+
+    .body:has(> .title):has(> .description):has(> .votes) > .title a:hover,
+    .body:has(> .title):has(> .description):has(> .votes) > .description a:hover,
+    .body:has(> .title):has(> .description):has(> .votes) > .actions a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+}

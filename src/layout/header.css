@@ -1,0 +1,155 @@
+/* ===== layout/header =====
+   верхнее меню, его выпадающие списки, глобальный поиск и подсказки автодополнения.
+   размеры и положение меню оставлены сайту — меняются только цвета. */
+
+@media screen and (min-width: 1px) {
+    .l-top_menu-v2 {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 8%, rgb(var(--panel))),
+            rgb(var(--page))) !important;
+        color: rgb(var(--text)) !important;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 4px 18px rgba(var(--shade), .45);
+    }
+
+    .l-top_menu-v2 a,
+    .l-top_menu-v2 .menu-dropdown > span,
+    .l-top_menu-v2 .menu-dropdown > a {
+        color: rgb(var(--text)) !important;
+    }
+
+    .l-top_menu-v2 .menu-dropdown.active > span {
+        background: rgba(var(--accent), .12) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .l-top_menu-v2 .submenu {
+        background: linear-gradient(180deg,
+            color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--panel))),
+            rgb(var(--field))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        border-top: 2px solid color-mix(in srgb, rgb(var(--accent)) 85%, black) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .l-top_menu-v2 .submenu > .inner {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .l-top_menu-v2 .submenu .legend,
+    .l-top_menu-v2 .submenu .title,
+    .l-top_menu-v2 .submenu header,
+    .l-top_menu-v2 .submenu .menu-section {
+        color: color-mix(in srgb, rgb(var(--text-2)) 60%, rgb(var(--text-3))) !important;
+        background: transparent !important;
+        border-color: var(--line-faint) !important;
+    }
+
+    .l-top_menu-v2 .submenu > a,
+    .l-top_menu-v2 .submenu a {
+        background: transparent !important;
+        color: var(--text-mid) !important;
+        border-color: transparent !important;
+    }
+
+    .l-top_menu-v2 .submenu a:active {
+        background: var(--row-fade) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .l-top_menu-v2 .submenu a::before,
+    .l-top_menu-v2 .submenu .icon {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    /* поиск */
+    .l-top_menu-v2 .global-search input,
+    .b-main_search .input,
+    .b-main_search .input input {
+        background: rgb(var(--deep)) !important;
+        color: var(--field-text) !important;
+        border-color: rgba(var(--cyan), .22) !important;
+    }
+
+    .l-top_menu-v2 .global-search input:focus,
+    .b-main_search .input:focus-within {
+        border-color: rgba(var(--accent-2), .52) !important;
+        box-shadow: 0 0 8px rgba(var(--accent), .15);
+    }
+
+    .l-top_menu-v2 .global-search input::placeholder,
+    .b-main_search input::placeholder {
+        color: var(--field-placeholder) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results,
+    .b-main_search ul.popup,
+    .ac_results,
+    .completable-block.menu-suggest {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results > *,
+    .b-main_search ul.popup li,
+    .ac_results li {
+        background: transparent !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .l-top_menu-v2 .global-search .search-results .active,
+    .b-main_search ul.popup li.active,
+    .ac_over {
+        background: var(--row-hover) !important;
+        color: #fff !important;
+    }
+
+    .ac_odd {
+        background: rgba(255, 255, 255, .018) !important;
+    }
+
+    .ac_results .name,
+    .ac_results .name a {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .ac_results .name > strong {
+        background: rgba(var(--warm), .22) !important;
+        color: rgb(var(--warm-2)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .l-top_menu-v2 .menu-dropdown:hover > span,
+    .l-top_menu-v2 .menu-dropdown:hover > a {
+        background: rgba(var(--accent), .12) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .l-top_menu-v2 .submenu > a:hover,
+    .l-top_menu-v2 .submenu a:hover {
+        background: var(--row-fade) !important;
+        color: rgb(var(--text-strong)) !important;
+        box-shadow: var(--row-mark);
+    }
+
+    .l-top_menu-v2 .global-search .search-results > *:hover,
+    .b-main_search ul.popup li:hover {
+        background: var(--row-hover) !important;
+        color: #fff !important;
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 1023px) {
+    .l-top_menu-v2 .submenu {
+        box-shadow: none !important;
+    }
+}

@@ -1,0 +1,32 @@
+/* ===== pages/lists =====
+   списки пользователя (аниме / манга) */
+
+@media screen and (min-width: 1px) {
+    .p-user_rates-index .l-menu,
+    .p-user_rates-index .l-content {
+        color: rgb(var(--text-2));
+    }
+
+    .p-user_rates-index .stat-categories .category,
+    .p-user_rates-index .list-groups .summary,
+    .p-user_rates-index .list-lines tr {
+        border-color: var(--line) !important;
+    }
+
+    .p-user_rates-index .stat-categories .category.active {
+        background: rgba(var(--accent), .13) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+
+    .p-user_rates-index .list-lines tr.edit-form form {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text)) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .p-user_rates-index .stat-categories .category:hover {
+        background: rgba(var(--accent), .13) !important;
+        color: rgb(var(--lilac)) !important;
+    }
+}

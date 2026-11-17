@@ -1,0 +1,36 @@
+/* ===== components/comments =====
+   комментарии, сообщения, диалоги */
+
+@media screen and (min-width: 1px) {
+    .b-comment,
+    .b-message,
+    .b-dialog {
+        color: rgb(var(--text-2));
+        border-color: var(--line) !important;
+    }
+
+    .b-comment > .inner,
+    .b-message > .inner,
+    .b-dialog > .inner {
+        background: transparent !important;
+    }
+
+    .b-comment > .inner header .name-date a.name,
+    .b-message > .inner header .name-date a.name,
+    .b-dialog > .inner header .name-date a.name {
+        color: rgb(var(--accent-2)) !important;
+    }
+
+    .b-comment > .inner header .name-date .time,
+    .b-message > .inner header .name-date .time,
+    .b-dialog > .inner header .name-date .time,
+    .b-comment-info {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-comment .body,
+    .b-message .body,
+    .b-dialog .body {
+        color: rgb(var(--text-2));
+    }
+}

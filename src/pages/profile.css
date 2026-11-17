@@ -1,0 +1,80 @@
+/* ===== pages/profile =====
+   шапка профиля, аватар, история, блоки друзей / клубов / избранного */
+
+@media screen and (min-width: 1px) {
+    .p-profiles .profile-head {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        background: linear-gradient(90deg,
+            color-mix(in srgb, color-mix(in srgb, rgb(var(--accent)) 30%, rgb(var(--bg))) 78%, transparent),
+            rgba(var(--panel), .91) 35%,
+            rgba(var(--panel), .91) 66%,
+            color-mix(in srgb, color-mix(in srgb, rgb(var(--cyan)) 18%, rgb(var(--bg))) 72%, transparent)) !important;
+        border: 1px solid var(--line-2);
+        border-top: 2px solid rgba(var(--warm), .48);
+        box-shadow:
+            inset 0 0 50px rgba(var(--shade), .48),
+            0 8px 25px rgba(var(--shade), .42);
+    }
+
+    .p-profiles .profile-head::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(circle at 76% 30%, rgba(var(--lilac), .12), transparent 23%),
+            radial-gradient(circle at 34% 37%, rgba(var(--cyan), .07), transparent 21%);
+    }
+
+    .p-profiles .profile-head > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .p-profiles .profile-head h1,
+    .p-profiles .profile-head .name {
+        color: rgb(var(--lilac)) !important;
+        text-shadow: 0 2px 4px rgba(var(--shade), .72);
+    }
+
+    .p-profiles .profile-head .c-info,
+    .p-profiles .profile-head .c-info *,
+    .p-profiles .profile-head .notice,
+    .p-profiles .profile-head .misc {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .p-profiles .profile-head .avatar img,
+    .p-profiles .profile-head img.avatar {
+        background: rgb(var(--deep)) !important;
+        border: 2px solid rgba(var(--accent-2), .54) !important;
+        box-shadow:
+            0 0 0 4px rgba(var(--panel), .88),
+            0 0 16px rgba(var(--accent-2), .12);
+    }
+
+    .p-profiles .profile-head .c-history {
+        background: rgba(var(--bg), .5) !important;
+        border-left-color: var(--line) !important;
+    }
+
+    .p-profiles .profile-head .c-history .entry {
+        border-color: var(--line) !important;
+    }
+
+    .p-profiles .cc-friends,
+    .p-profiles .cc-clubs,
+    .p-profiles .cc-favourites {
+        background: rgba(var(--page), .35);
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 767px) {
+    .p-profiles .profile-head {
+        box-shadow: inset 0 0 34px rgba(var(--shade), .42);
+    }
+}

@@ -1,0 +1,57 @@
+/* ===== components/headings =====
+   заголовки блоков .headline / .midheadline / .subheadline; исходные размеры сохранены */
+
+@media screen and (min-width: 1px) {
+    .headline,
+    .midheadline,
+    .subheadline {
+        position: relative;
+        overflow: hidden;
+        background: var(--heading-bg) !important;
+        color: var(--heading-text) !important;
+        border-left-color: var(--heading-mark) !important;
+        border-bottom: 1px solid rgba(var(--line-tint), .12);
+        box-shadow: inset 0 0 10px rgba(var(--shade), .24);
+        text-shadow: 0 1px 2px rgba(var(--shade), .55);
+    }
+
+    .headline {
+        padding-top: 4px !important;
+        padding-bottom: 2px !important;
+    }
+
+    .midheadline,
+    .subheadline {
+        line-height: 30px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .headline > a,
+    .midheadline > a,
+    .subheadline > a {
+        color: inherit !important;
+    }
+
+    .headline > a::before,
+    .midheadline > a::before,
+    .subheadline > a::before {
+        color: var(--heading-dot) !important;
+    }
+
+    .headline .misc-links,
+    .subheadline .misc-link {
+        color: rgb(var(--text-2)) !important;
+    }
+}
+
+/* ----- телефон и узкие экраны ----- */
+
+@media screen and (max-width: 767px) {
+    .headline,
+    .midheadline,
+    .subheadline {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+}
