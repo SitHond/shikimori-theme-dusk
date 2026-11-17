@@ -28,8 +28,10 @@
 ## выпуск релиза
 
 1. правки в `src/` → `python3 tools/build.py --version X.Y.Z` → `tools/quick_check.py` без ошибок.
-2. в `site.css` и `README.md` заменить старый тег на новый во всех `@import`.
-3. commit → push в `main` → тег `vX.Y.Z` (шикимори кеширует каждый адрес на 8 часов, новый тег — новый адрес). опубликованные теги не переносить.
+2. в `site.css` и `README.md` заменить старый тег на новый во всех `@import`; строка `| vX.Y.Z | … |` в таблице «история» `docs/ARCHITECTURE.md`.
+3. commit → push в `main` → `git tag vX.Y.Z` (или `git tag -a vX.Y.Z -m "описание"`) → `git push origin vX.Y.Z`. шикимори кеширует каждый адрес на 8 часов, новый тег — новый адрес. опубликованные теги не переносить.
+4. дальше всё делает GitHub Actions (`.github/workflows/release.yml`): сверяет тег с версией в подвале и ссылками в `site.css`/`README.md`, проверяет, что `css/` собран из `src/`, гоняет `quick_check.py`, создаёт release (описание — из сообщения тега или строки истории, файлы частей и `site.css` прикреплены) и проверяет, что raw.githubusercontent отдаёт файлы тега. если проверка упала — release не создаётся: поправить, удалить тег (`git push origin :vX.Y.Z`, пока релиза нет) и поставить заново.
+5. `.github/workflows/check.yml` гоняет те же проверки на каждый push в `main` и pull request.
 
 ## жёсткие правила (фильтр шикимори)
 

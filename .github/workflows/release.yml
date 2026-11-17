@@ -1,0 +1,109 @@
+name: релиз
+
+# запускается при пуше тега vX.Y.Z:
+#   python3 tools/build.py --version X.Y.Z  → commit → push → git tag vX.Y.Z → git push origin vX.Y.Z
+# проверяет, что тег совпадает с версией в подвале и ссылками в site.css / README.md,
+# что css/ собран из src/, гоняет эмуляцию фильтра шикимори и создаёт GitHub release.
+# описание релиза: сообщение аннотированного тега (git tag -a vX.Y.Z -m "…"),
+# иначе строка vX.Y.Z из таблицы «история» в docs/ARCHITECTURE.md.
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: теги целиком (checkout теряет сообщение аннотированного тега)
+        run: git fetch --force --tags origin
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: версия совпадает с тегом
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VER="${TAG#v}"
+          echo "VER=$VER" >> "$GITHUB_ENV"
+          fail=0
+          grep -q -- "--theme-version: \"$VER\";" src/layout/footer.css \
+            || { echo "::error::в src/layout/footer.css не $VER — запустите python3 tools/build.py --version $VER"; fail=1; }
+          for f in site.css README.md; do
+            if grep -o 'shikimori-theme-dusk/v[0-9.]*/' "$f" | grep -v -q "/$TAG/"; then
+              echo "::error::в $f есть ссылки не на $TAG"; fail=1
+            fi
+            grep -q "/$TAG/css/" "$f" || { echo "::error::в $f нет ссылок на $TAG"; fail=1; }
+          done
+          exit $fail
+
+      - name: css/ собран из src/
+        run: |
+          python3 tools/build.py --out /tmp/built > /dev/null
+          if ! diff -r -q css /tmp/built; then
+            echo "::error::css/ не совпадает с src/ — запустите python3 tools/build.py --version $VER и закоммитьте css/"
+            exit 1
+          fi
+
+      - name: проверка фильтра шикимори
+        run: python3 tools/quick_check.py
+
+      - name: описание релиза
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          {
+            if [ "$(git cat-file -t "$TAG")" = tag ]; then
+              git tag -l --format='%(contents:body)' "$TAG" | sed '/^-----BEGIN PGP/,$d'
+              git tag -l --format='%(contents:subject)' "$TAG" | head -1 > /tmp/subject
+            fi
+            if [ ! -s /tmp/subject ] || [ "$(cat /tmp/subject)" = "$TAG" ]; then
+              grep -E "^\| $TAG \|" docs/ARCHITECTURE.md | head -1 | sed -E 's/^\| [^|]+\| (.*) \|$/\1/'
+            else
+              cat /tmp/subject
+            fi
+            echo
+            echo "## установка"
+            echo
+            echo "скопируйте [site.css](https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$TAG/site.css) целиком в «Настройки → Внешний вид сайта», сохраните и обновите страницу (Ctrl+Shift+R)."
+            echo
+            echo '```css'
+            grep '^@import' site.css
+            echo '```'
+          } > /tmp/notes.md
+          cat /tmp/notes.md
+
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release edit "$TAG" --title "shiki dusk $TAG" --notes-file /tmp/notes.md
+            gh release upload "$TAG" css/part_*.css site.css --clobber
+          else
+            gh release create "$TAG" --title "shiki dusk $TAG" --notes-file /tmp/notes.md --verify-tag \
+              css/part_*.css site.css
+          fi
+
+      - name: файлы отдаются с raw.githubusercontent.com
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          fail=0
+          for f in css/part_*.css site.css; do
+            url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$TAG/$f"
+            code=$(curl -s -o /tmp/raw -w '%{http_code}' "$url")
+            if [ "$code" = 200 ] && cmp -s /tmp/raw "$f"; then
+              echo "ok  $f"
+            else
+              echo "::error::$url → $code или содержимое не совпадает"; fail=1
+            fi
+          done
+          exit $fail

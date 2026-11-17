@@ -1,0 +1,27 @@
+name: проверка
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: проверка фильтра шикимори
+        run: python3 tools/quick_check.py
+
+      - name: css/ собран из src/
+        run: |
+          python3 tools/build.py --out /tmp/built > /dev/null
+          if ! diff -r -q css /tmp/built; then
+            echo "::error::css/ не совпадает с src/ — запустите python3 tools/build.py и закоммитьте css/"
+            exit 1
+          fi
