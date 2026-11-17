@@ -10,7 +10,7 @@
 
 ```css
 @import url("https://css-club.web.app/css/CodeMirror_dark.css");
-@import url("https://raw.githubusercontent.com/SitHond/shikimori-theme-dusk/v0.1.0/css/part_01.css");
+@import url("https://raw.githubusercontent.com/SitHond/shikimori-theme-dusk/v0.2.0/css/part_01.css");
 ```
 
 ## Свои цвета

@@ -1,4 +1,4 @@
-/* shiki dusk v0.1.0 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
+/* shiki dusk v0.2.0 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
 /* ===== tokens/palette =====
    палитра темы: исходные цвета (rgb-тройки без rgb()) и родные переменные шикимори.
    свои цвета задаются в site.css внутри той же обёртки @media … { html:root { … } },
@@ -1903,7 +1903,7 @@
 @media screen and (min-width: 1px) {
     :root {
         --theme-name: "shiki dusk";
-        --theme-version: "0.1.0";
+        --theme-version: "0.2.0";
     }
 
     .l-footer {
