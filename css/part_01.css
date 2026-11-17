@@ -1,4 +1,4 @@
-/* shiki dusk v0.2.1 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
+/* shiki dusk v0.3.0 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
 /* ===== tokens/palette =====
    палитра темы: исходные цвета (rgb-тройки без rgb()) и родные переменные шикимори.
    свои цвета задаются в site.css внутри той же обёртки @media … { html:root { … } },
@@ -332,6 +332,16 @@
 
 /* ----- телефон и узкие экраны ----- */
 
+@media screen and (max-width: 1023px) {
+    /* язычок «меню» сбоку страницы */
+    .menu-toggler .toggler {
+        background: color-mix(in srgb, rgb(var(--accent)) 18%, rgb(var(--panel))) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: 0 4px 14px rgba(var(--shade), .5) !important;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .l-page {
         border-left: 0;
@@ -598,6 +608,20 @@
     }
 }
 
+/* «загрузить ещё» под лентами и каталогом */
+@media screen and (min-width: 1px) {
+    .b-postloader {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    .b-postloader:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
     .b-button:hover,
     .b-link_button:hover,
@@ -608,6 +632,11 @@
         background: var(--btn-bg-hover) !important;
         color: var(--btn-text-hover) !important;
         border-color: var(--btn-border-hover) !important;
+    }
+
+    .b-postloader:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
     }
 
     .b-comments .comments-loader:hover,
@@ -782,6 +811,20 @@
     }
 }
 
+/* метки «студия», «рецензия»: у сайта светло-серые */
+@media screen and (min-width: 1px) {
+    .b-anime_status_tag.studio,
+    .b-anime_status_tag.review {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        filter: none;
+    }
+
+    .b-anime_status_tag.studio:active {
+        background: var(--chip-bg-hover) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
     .b-tag:hover,
     .b-entry-info .line .b-tag:hover {
@@ -912,6 +955,78 @@
     .b-stats_bar .stat_names * {
         color: rgb(var(--text-2)) !important;
     }
+
+    /* кнопка «добавить в список» и статусы в ней: тёмная, статус — оттенком */
+    .b-add_to_list .trigger {
+        --rate-hue: var(--accent-2);
+        background: rgba(var(--rate-hue), .12) !important;
+        color: color-mix(in srgb, rgb(var(--rate-hue)) 80%, rgb(var(--text))) !important;
+        border: 1px solid rgba(var(--rate-hue), .3) !important;
+        box-shadow: none !important;
+    }
+
+    .b-add_to_list.watching .trigger,
+    .b-add_to_list.rewatching .trigger {
+        --rate-hue: var(--cyan);
+    }
+
+    .b-add_to_list.completed .trigger {
+        --rate-hue: var(--green);
+    }
+
+    .b-add_to_list.on_hold .trigger {
+        --rate-hue: var(--yellow);
+    }
+
+    .b-add_to_list.dropped .trigger {
+        --rate-hue: var(--red);
+    }
+
+    .b-add_to_list .trigger .trigger-arrow,
+    .b-add_to_list .trigger::after {
+        color: inherit !important;
+        border-color: currentColor !important;
+    }
+
+    .b-add_to_list .expanded-options {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    /* полосы «оценки людей», «в списках у людей» */
+    .bar.simple .bar,
+    .bar.simple .bar.s0,
+    .bar.simple .bar.s1 {
+        background: color-mix(in srgb, rgb(var(--accent)) 90%, rgb(var(--accent-2))) !important;
+    }
+
+    .bar.simple .bar.s2 {
+        background: color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--bg))) !important;
+    }
+
+    .bar.simple .bar.s3 {
+        background: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--bg))) !important;
+    }
+
+    .bar.simple .bar .value,
+    .bar.simple .bar {
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .b-stats_bar .bar .third {
+        background: color-mix(in srgb, rgb(var(--text-3)) 60%, rgb(var(--bg))) !important;
+    }
+
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-add_to_list .trigger:hover {
+        background: rgba(var(--rate-hue), .22) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--rate-hue), .5) !important;
+    }
 }
 
 /* ===== components/users =====
@@ -1013,6 +1128,21 @@
         background: var(--field-bg) !important;
         color: var(--field-text) !important;
         border-color: rgba(var(--line-tint), .2) !important;
+    }
+
+    .b-shiki_editor-v2 .menubar {
+        background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--accent)) 8%, rgb(var(--panel))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-shiki_editor-v2 .menubar :is(button, .icon, span) {
+        color: color-mix(in srgb, rgb(var(--lilac)) 80%, rgb(var(--text-2))) !important;
+    }
+
+    .b-shiki_editor-v2 .menubar button {
+        background: transparent !important;
+        border-color: transparent !important;
     }
 
     .b-shiki_editor .body .preview {
@@ -1171,6 +1301,34 @@
         color: rgb(var(--lilac)) !important;
         border-color: var(--line-2) !important;
         box-shadow: 0 0 14px rgba(var(--cyan), .09);
+    }
+
+    /* кнопка «…» альтернативных названий */
+    .b-entry-info .other-names,
+    .other-names {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    /* свои теги тайтла (shikimori.rip) */
+    .tag-list .tag-chip {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    .tag-list .tag-chip.add-tag-chip {
+        background: rgba(var(--cyan), .12) !important;
+        color: rgb(var(--cyan)) !important;
+        border-color: rgba(var(--cyan), .3) !important;
+    }
+
+    /* «скрытые комментарии» (shikimori.rip) */
+    .b-rip_hidden_comments {
+        background: rgba(var(--warm), .08) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid rgba(var(--warm), .22) !important;
     }
 
     /* видео и старый плеер */
@@ -1383,6 +1541,22 @@
         color: rgb(var(--red)) !important;
     }
 
+    /* значок мнения в отзывах */
+    .review-info .opinion {
+        --op-hue: var(--cyan);
+        background: rgba(var(--op-hue), .14) !important;
+        color: rgb(var(--op-hue)) !important;
+        border: 1px solid rgba(var(--op-hue), .3) !important;
+    }
+
+    .review-info .opinion.positive {
+        --op-hue: var(--green);
+    }
+
+    .review-info .opinion.negative {
+        --op-hue: var(--red);
+    }
+
     .b-reviews_navigation .navigation-container {
         color: rgb(var(--text-2));
     }
@@ -1516,6 +1690,33 @@
         background: var(--chip-bg) !important;
         color: var(--chip-text) !important;
         border-color: var(--line) !important;
+    }
+
+    /* полоса «темы дня» */
+    .b-hot_topics-v2 {
+        background: linear-gradient(90deg, color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--panel))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-bottom: 1px solid var(--line) !important;
+    }
+
+    .b-hot_topics-v2 .topic.subject {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    /* блок входа для гостей */
+    .fc-user-sections .devise {
+        background: linear-gradient(145deg, color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line-2) !important;
+    }
+
+    .fc-user-sections .devise .b-button,
+    .fc-user-sections .devise a.b-button {
+        background: var(--btn-bg) !important;
+    }
+
+    .fc-user-sections .devise :is(.title, .subheadline, .label) {
+        color: rgb(var(--text-3)) !important;
     }
 
     /* «мой список»: убрать светлую карточку сайта */
@@ -1700,6 +1901,52 @@
 
     .b-block_list li:active {
         background: var(--row-hover) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    /* фильтры shikimori.rip: поле студий, списки с галочками, переключатель «или / и» */
+    .vue-tags-input,
+    .vue-tags-input .ti-input,
+    .b-checkbox-dropdown_trigger {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    .vue-tags-input .ti-new-tag-input {
+        background: transparent !important;
+        color: var(--field-text) !important;
+    }
+
+    .vue-tags-input .ti-tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+    }
+
+    .b-checkbox-dropdown_trigger::after {
+        border-top-color: rgb(var(--text-3)) !important;
+    }
+
+    .b-checkbox-dropdown_list,
+    .vue-tags-input .ti-autocomplete {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .mode-toggle {
+        background: var(--chip-bg) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    .mode-toggle > * {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .mode-toggle > .active,
+    .mode-toggle > .selected {
+        background: rgb(var(--accent)) !important;
         color: rgb(var(--text-strong)) !important;
     }
 
@@ -2040,7 +2287,7 @@
 @media screen and (min-width: 1px) {
     :root {
         --theme-name: "shiki dusk";
-        --theme-version: "0.2.1";
+        --theme-version: "0.3.0";
     }
 
     .l-footer {

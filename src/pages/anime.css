@@ -34,6 +34,34 @@
         box-shadow: 0 0 14px rgba(var(--cyan), .09);
     }
 
+    /* кнопка «…» альтернативных названий */
+    .b-entry-info .other-names,
+    .other-names {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    /* свои теги тайтла (shikimori.rip) */
+    .tag-list .tag-chip {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    .tag-list .tag-chip.add-tag-chip {
+        background: rgba(var(--cyan), .12) !important;
+        color: rgb(var(--cyan)) !important;
+        border-color: rgba(var(--cyan), .3) !important;
+    }
+
+    /* «скрытые комментарии» (shikimori.rip) */
+    .b-rip_hidden_comments {
+        background: rgba(var(--warm), .08) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid rgba(var(--warm), .22) !important;
+    }
+
     /* видео и старый плеер */
     .b-video .video-link {
         background: rgb(var(--deep)) !important;

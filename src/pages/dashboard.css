@@ -16,6 +16,33 @@
         border-color: var(--line) !important;
     }
 
+    /* полоса «темы дня» */
+    .b-hot_topics-v2 {
+        background: linear-gradient(90deg, color-mix(in srgb, rgb(var(--accent)) 10%, rgb(var(--panel))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-bottom: 1px solid var(--line) !important;
+    }
+
+    .b-hot_topics-v2 .topic.subject {
+        color: rgb(var(--lilac)) !important;
+    }
+
+    /* блок входа для гостей */
+    .fc-user-sections .devise {
+        background: linear-gradient(145deg, color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line-2) !important;
+    }
+
+    .fc-user-sections .devise .b-button,
+    .fc-user-sections .devise a.b-button {
+        background: var(--btn-bg) !important;
+    }
+
+    .fc-user-sections .devise :is(.title, .subheadline, .label) {
+        color: rgb(var(--text-3)) !important;
+    }
+
     /* «мой список»: убрать светлую карточку сайта */
     .p-dashboards-show .v2 .my-list {
         background: linear-gradient(145deg, color-mix(in srgb, rgb(var(--accent)) 6%, rgb(var(--surface))), rgb(var(--panel))) !important;

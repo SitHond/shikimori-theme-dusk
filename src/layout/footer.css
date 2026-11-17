@@ -4,7 +4,7 @@
 @media screen and (min-width: 1px) {
     :root {
         --theme-name: "shiki dusk";
-        --theme-version: "0.2.1";
+        --theme-version: "0.3.0";
     }
 
     .l-footer {

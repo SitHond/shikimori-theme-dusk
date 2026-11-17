@@ -61,6 +61,16 @@
 
 /* ----- телефон и узкие экраны ----- */
 
+@media screen and (max-width: 1023px) {
+    /* язычок «меню» сбоку страницы */
+    .menu-toggler .toggler {
+        background: color-mix(in srgb, rgb(var(--accent)) 18%, rgb(var(--panel))) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: 0 4px 14px rgba(var(--shade), .5) !important;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .l-page {
         border-left: 0;

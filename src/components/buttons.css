@@ -42,6 +42,20 @@
     }
 }
 
+/* «загрузить ещё» под лентами и каталогом */
+@media screen and (min-width: 1px) {
+    .b-postloader {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--line) !important;
+    }
+
+    .b-postloader:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
     .b-button:hover,
     .b-link_button:hover,
@@ -52,6 +66,11 @@
         background: var(--btn-bg-hover) !important;
         color: var(--btn-text-hover) !important;
         border-color: var(--btn-border-hover) !important;
+    }
+
+    .b-postloader:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
     }
 
     .b-comments .comments-loader:hover,

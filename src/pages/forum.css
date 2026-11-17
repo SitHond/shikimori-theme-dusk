@@ -72,6 +72,22 @@
         color: rgb(var(--red)) !important;
     }
 
+    /* значок мнения в отзывах */
+    .review-info .opinion {
+        --op-hue: var(--cyan);
+        background: rgba(var(--op-hue), .14) !important;
+        color: rgb(var(--op-hue)) !important;
+        border: 1px solid rgba(var(--op-hue), .3) !important;
+    }
+
+    .review-info .opinion.positive {
+        --op-hue: var(--green);
+    }
+
+    .review-info .opinion.negative {
+        --op-hue: var(--red);
+    }
+
     .b-reviews_navigation .navigation-container {
         color: rgb(var(--text-2));
     }

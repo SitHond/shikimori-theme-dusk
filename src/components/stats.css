@@ -57,4 +57,76 @@
     .b-stats_bar .stat_names * {
         color: rgb(var(--text-2)) !important;
     }
+
+    /* кнопка «добавить в список» и статусы в ней: тёмная, статус — оттенком */
+    .b-add_to_list .trigger {
+        --rate-hue: var(--accent-2);
+        background: rgba(var(--rate-hue), .12) !important;
+        color: color-mix(in srgb, rgb(var(--rate-hue)) 80%, rgb(var(--text))) !important;
+        border: 1px solid rgba(var(--rate-hue), .3) !important;
+        box-shadow: none !important;
+    }
+
+    .b-add_to_list.watching .trigger,
+    .b-add_to_list.rewatching .trigger {
+        --rate-hue: var(--cyan);
+    }
+
+    .b-add_to_list.completed .trigger {
+        --rate-hue: var(--green);
+    }
+
+    .b-add_to_list.on_hold .trigger {
+        --rate-hue: var(--yellow);
+    }
+
+    .b-add_to_list.dropped .trigger {
+        --rate-hue: var(--red);
+    }
+
+    .b-add_to_list .trigger .trigger-arrow,
+    .b-add_to_list .trigger::after {
+        color: inherit !important;
+        border-color: currentColor !important;
+    }
+
+    .b-add_to_list .expanded-options {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    /* полосы «оценки людей», «в списках у людей» */
+    .bar.simple .bar,
+    .bar.simple .bar.s0,
+    .bar.simple .bar.s1 {
+        background: color-mix(in srgb, rgb(var(--accent)) 90%, rgb(var(--accent-2))) !important;
+    }
+
+    .bar.simple .bar.s2 {
+        background: color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--bg))) !important;
+    }
+
+    .bar.simple .bar.s3 {
+        background: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--bg))) !important;
+    }
+
+    .bar.simple .bar .value,
+    .bar.simple .bar {
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .b-stats_bar .bar .third {
+        background: color-mix(in srgb, rgb(var(--text-3)) 60%, rgb(var(--bg))) !important;
+    }
+
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .b-add_to_list .trigger:hover {
+        background: rgba(var(--rate-hue), .22) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgba(var(--rate-hue), .5) !important;
+    }
 }

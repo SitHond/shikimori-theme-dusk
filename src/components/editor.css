@@ -20,6 +20,21 @@
         border-color: rgba(var(--line-tint), .2) !important;
     }
 
+    .b-shiki_editor-v2 .menubar {
+        background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--accent)) 8%, rgb(var(--panel))), rgb(var(--panel))) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line) !important;
+    }
+
+    .b-shiki_editor-v2 .menubar :is(button, .icon, span) {
+        color: color-mix(in srgb, rgb(var(--lilac)) 80%, rgb(var(--text-2))) !important;
+    }
+
+    .b-shiki_editor-v2 .menubar button {
+        background: transparent !important;
+        border-color: transparent !important;
+    }
+
     .b-shiki_editor .body .preview {
         background: rgb(var(--panel)) !important;
         color: rgb(var(--text-2)) !important;

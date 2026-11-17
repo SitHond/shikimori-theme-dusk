@@ -39,6 +39,20 @@
     }
 }
 
+/* метки «студия», «рецензия»: у сайта светло-серые */
+@media screen and (min-width: 1px) {
+    .b-anime_status_tag.studio,
+    .b-anime_status_tag.review {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        filter: none;
+    }
+
+    .b-anime_status_tag.studio:active {
+        background: var(--chip-bg-hover) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
     .b-tag:hover,
     .b-entry-info .line .b-tag:hover {

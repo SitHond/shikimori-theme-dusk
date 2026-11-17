@@ -43,6 +43,52 @@
         color: rgb(var(--text-strong)) !important;
     }
 
+    /* фильтры shikimori.rip: поле студий, списки с галочками, переключатель «или / и» */
+    .vue-tags-input,
+    .vue-tags-input .ti-input,
+    .b-checkbox-dropdown_trigger {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    .vue-tags-input .ti-new-tag-input {
+        background: transparent !important;
+        color: var(--field-text) !important;
+    }
+
+    .vue-tags-input .ti-tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+    }
+
+    .b-checkbox-dropdown_trigger::after {
+        border-top-color: rgb(var(--text-3)) !important;
+    }
+
+    .b-checkbox-dropdown_list,
+    .vue-tags-input .ti-autocomplete {
+        background: var(--drop-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border-color: var(--line-2) !important;
+        box-shadow: var(--drop-shadow) !important;
+    }
+
+    .mode-toggle {
+        background: var(--chip-bg) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    .mode-toggle > * {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .mode-toggle > .active,
+    .mode-toggle > .selected {
+        background: rgb(var(--accent)) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
     /* выпадающие поля фильтров (страна, жанры…) */
     .c-ms-control:not(#u),
     .c-ms-field {
