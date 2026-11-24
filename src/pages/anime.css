@@ -42,6 +42,38 @@
         border: 1px solid var(--chip-border) !important;
     }
 
+    /* платформы, темы и тэги, «Показать все» (страницы VN и др., shikimori.rip) */
+    .b-platform-tag {
+        background: rgba(var(--cyan), .1) !important;
+        color: color-mix(in srgb, rgb(var(--cyan)) 75%, rgb(var(--text))) !important;
+        border: 1px solid rgba(var(--cyan), .28) !important;
+    }
+
+    .b-genre-tag {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    .b-genre-tag :is(.genre-en, .genre-ru) {
+        color: inherit !important;
+    }
+
+    .more-toggle {
+        background: transparent !important;
+        color: rgb(var(--warm)) !important;
+        border: 1px dashed rgba(var(--warm), .4) !important;
+        box-shadow: none !important;
+        cursor: pointer;
+    }
+
+    .b-platform-tag:active,
+    .b-genre-tag:active,
+    .more-toggle:active {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+    }
+
     /* свои теги тайтла (shikimori.rip) */
     .tag-list .tag-chip {
         background: var(--chip-bg) !important;
@@ -173,6 +205,18 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+    .b-platform-tag:hover,
+    .b-genre-tag:hover {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+        border-color: var(--chip-border-hover) !important;
+    }
+
+    .more-toggle:hover {
+        background: rgba(var(--warm), .1) !important;
+        color: rgb(var(--warm-2)) !important;
+    }
+
     .b-video_player .cc-player_controls .c-control:hover {
         background: rgba(var(--accent), .18) !important;
         color: #fff !important;

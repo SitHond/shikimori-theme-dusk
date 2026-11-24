@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/%D0%9F%D0%9A%20%2B%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD-ffb76a?style=flat-square" alt="ПК и телефон">
 </p>
 
-Тёмная тема для [ShikiRIP](https://shiki.rip) и [Shiki](https://shikimori.io): фиолетовые сумерки, тёплый свет лампы под курсором и холодные голубые акценты. Работает на компьютере и на телефоне, ставится одним стилем в «Внешний вид сайта». Текущая версия — **v0.3.0**.
+Тёмная тема для [ShikiRIP](https://shiki.rip) и [Shiki](https://shikimori.io): фиолетовые сумерки, тёплый свет лампы под курсором и холодные голубые акценты. Работает на компьютере и на телефоне, ставится одним стилем в «Внешний вид сайта». Текущая версия — **v0.3.1**.
 
 <table>
   <tr>
@@ -34,19 +34,19 @@
 ## Установка
 
 1. Откройте профиль → «Настройки» → «Внешний вид сайта».
-2. Откройте файл [site.css](https://github.com/SitHond/shikimori-theme-dusk/blob/v0.3.0/site.css), скопируйте его **целиком** (кнопка копирования справа над кодом) и вставьте в поле стиля вместо того, что там было.
+2. Откройте файл [site.css](https://github.com/SitHond/shikimori-theme-dusk/blob/v0.3.1/site.css), скопируйте его **целиком** (кнопка копирования справа над кодом) и вставьте в поле стиля вместо того, что там было.
 3. Нажмите «Сохранить» и обновите страницу (Ctrl+Shift+R; на телефоне — обновление без кеша, если оно есть).
 
 Главное в site.css — две строки подключения и блок «Палитра»:
 
 ```css
 @import url("https://css-club.web.app/css/CodeMirror_dark.css");
-@import url("https://raw.githubusercontent.com/SitHond/shikimori-theme-dusk/v0.3.0/css/part_01.css");
+@import url("https://raw.githubusercontent.com/SitHond/shikimori-theme-dusk/v0.3.1/css/part_01.css");
 ```
 
 ### Обновление
 
-Когда выйдет новая версия, замените в строке `@import` номер `v0.3.0` на новый со страницы [Releases](https://github.com/SitHond/shikimori-theme-dusk/releases). Свою палитру, если вы её меняли, трогать не нужно.
+Когда выйдет новая версия, замените в строке `@import` номер `v0.3.1` на новый со страницы [Releases](https://github.com/SitHond/shikimori-theme-dusk/releases). Свою палитру, если вы её меняли, трогать не нужно.
 
 ## Палитра
 

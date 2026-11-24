@@ -107,7 +107,81 @@
     }
 }
 
+/* тёмный текст на тёмном фоне и светлые мелочи, найденные обходом shikimori.rip (sakura/naruto) */
+@media screen and (min-width: 1px) {
+    /* из base/base: ссылка внутри заголовка страницы (форум, рецензии) — сайт красит её в #123 */
+    header.head h1 a,
+    header.head h1 a.reload {
+        color: inherit !important;
+    }
+
+    /* из pages/dashboard: подпись «Темы дня» */
+    .b-hot_topics-v2 .subject {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    /* из pages/dashboard: строка статуса в новостях и автор */
+    .status-line .comments,
+    .status-line > span,
+    .author > span {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    /* из pages/anime: ключи в многострочной информации, подписи шкал, «в списках у N человек» */
+    .line.multiline > .key,
+    .line .x_label,
+    .total-rates {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    /* из pages/forum: метки отзывов, звёзды рецензий */
+    .label.neutral {
+        color: rgb(var(--cyan)) !important;
+    }
+
+    .b-reviews_navigation .navigation-node .label span,
+    .star-line .title {
+        color: var(--text-mid) !important;
+    }
+
+    /* из pages/lists: сводка и статистика списка */
+    .list-groups .summary,
+    .list-groups .summary .stat-value,
+    .misc-value .episodes_total {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    /* из pages/catalog: пункты меню каталога без наведения */
+    .no-hover > span,
+    .no-hover .link-title,
+    .no-hover .link-total {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    /* из components/users и коллекций: события пользователей, размер коллекции */
+    .line > .event,
+    .collection-size {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    /* из components/headings: кружок-подсказка «?» у заголовка */
+    .headline-with-help .help-circle {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border: 1px solid var(--chip-border) !important;
+    }
+
+    /* из components/carousels: заглушка карусели, пока грузятся постеры */
+    .b-shiki_swiper.is-loading {
+        background: rgb(var(--surface)) !important;
+    }
+}
+
 @media (hover: hover) and (pointer: fine) {
+    header.head h1 a.reload:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
     /* из layout/header */
     .l-top_menu-v2 .global-search .search-results .search-mode:hover,
     .l-top_menu-v2 .global-search .search-results .b-db_entry-variant-list_item:hover {

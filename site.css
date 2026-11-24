@@ -1,9 +1,9 @@
-/* shiki dusk v0.3.0 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
+/* shiki dusk v0.3.1 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
 /* Тёмный редактор кода в настройках. Эта строка нужна здесь: внутри файлов темы Шикимори её вырезает. */
 @import url("https://css-club.web.app/css/CodeMirror_dark.css");
 
 /* Тема. Шикимори обрабатывает только ~6 первых @import — не добавляйте лишних выше */
-@import url("https://raw.githubusercontent.com/SitHond/shikimori-theme-dusk/v0.3.0/css/part_01.css");
+@import url("https://raw.githubusercontent.com/SitHond/shikimori-theme-dusk/v0.3.1/css/part_01.css");
 
 /* ===================== Палитра ===================== */
 /* Фиолетовые сумерки + тёплый свет лампы. Всё остальное тема считает сама.
