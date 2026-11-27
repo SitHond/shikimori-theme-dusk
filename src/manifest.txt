@@ -19,6 +19,7 @@ pages/anime.css
 pages/forum.css
 pages/profile.css
 pages/dashboard.css
+pages/useful.css
 pages/catalog.css
 pages/lists.css
 pages/achievements.css

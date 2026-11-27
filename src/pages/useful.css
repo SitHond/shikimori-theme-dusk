@@ -1,0 +1,158 @@
+/* ===== pages/useful =====
+   «Полезное» (shikimori.rip, /useful): карточки программ и стилей, поиск, фильтры, голоса */
+
+@media screen and (min-width: 1px) {
+    /* поиск и кнопки над сеткой */
+    .b-useful_search input {
+        background: var(--field-bg) !important;
+        color: var(--field-text) !important;
+        border-color: var(--field-border) !important;
+    }
+
+    .b-useful_search input:focus {
+        border-color: var(--field-focus) !important;
+        box-shadow: var(--field-focus-glow) !important;
+    }
+
+    .b-useful_search .icon {
+        color: rgb(var(--text-3)) !important;
+    }
+
+    a.misc.b-useful_new {
+        background: rgb(var(--accent)) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: transparent !important;
+    }
+
+    .b-useful_notifications {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--chip-border) !important;
+    }
+
+    .b-useful_notifications.is-active {
+        background: rgba(var(--accent), .22) !important;
+        color: rgb(var(--lilac)) !important;
+        border-color: rgba(var(--accent-2), .4) !important;
+    }
+
+    /* фильтры «Все типы / Программа / Стиль / Другое» */
+    .b-useful_chip {
+        background: var(--chip-bg) !important;
+        color: var(--chip-text) !important;
+        border-color: var(--chip-border) !important;
+    }
+
+    .b-useful_chip.is-active {
+        background: rgb(var(--accent)) !important;
+        color: rgb(var(--text-strong)) !important;
+        border-color: rgb(var(--accent)) !important;
+    }
+
+    /* карточка */
+    .b-useful_card {
+        background: var(--plate-bg) !important;
+        color: rgb(var(--text-2)) !important;
+        border: 1px solid var(--line) !important;
+        box-shadow: 0 6px 18px rgba(var(--shade), .35);
+    }
+
+    .b-useful_card .poster {
+        background: rgb(var(--deep)) !important;
+    }
+
+    .b-useful_card .title a {
+        color: rgb(var(--lilac)) !important;
+        transition: color var(--ease-fast);
+    }
+
+    .b-useful_card .description {
+        color: rgb(var(--text-2)) !important;
+    }
+
+    .b-useful_card .author {
+        color: rgb(var(--text-2)) !important;
+        background: transparent !important;
+    }
+
+    .b-useful_card .vote {
+        background: var(--chip-bg) !important;
+        border-color: var(--chip-border) !important;
+    }
+
+    .b-useful_card .vote.up {
+        color: rgb(var(--green)) !important;
+    }
+
+    .b-useful_card .vote.down {
+        color: rgb(var(--red)) !important;
+    }
+
+    .b-useful_card .vote.up.active {
+        background: rgba(var(--green), .14) !important;
+        border-color: rgba(var(--green), .55) !important;
+    }
+
+    .b-useful_card .vote.down.active {
+        background: rgba(var(--red), .14) !important;
+        border-color: rgba(var(--red), .55) !important;
+    }
+
+    .b-useful_card .action {
+        background: rgba(var(--surface), .85) !important;
+        color: rgb(var(--text)) !important;
+        border: 1px solid var(--line-2) !important;
+    }
+
+    .b-useful_card .moderation .status.pending {
+        background: rgba(var(--yellow), .14) !important;
+        color: rgb(var(--yellow)) !important;
+    }
+
+    .b-useful_chip:active,
+    .b-useful_card .vote:active {
+        background: var(--chip-bg-hover) !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    a.misc.b-useful_new:hover {
+        background: var(--btn-bg-hover) !important;
+        color: var(--btn-text-hover) !important;
+    }
+
+    .b-useful_notifications:hover,
+    .b-useful_chip:hover:not(.is-active) {
+        background: var(--chip-bg-hover) !important;
+        color: var(--chip-text-hover) !important;
+        border-color: var(--chip-border-hover) !important;
+    }
+
+    .b-useful_card:hover {
+        border-color: var(--line-2) !important;
+        box-shadow: 0 12px 26px rgba(var(--shade), .5), 0 0 0 1px rgba(var(--accent-2), .18);
+    }
+
+    .b-useful_card .title a:hover {
+        color: rgb(var(--warm)) !important;
+    }
+
+    .b-useful_card .author:hover {
+        background: var(--chip-bg) !important;
+        color: rgb(var(--warm)) !important;
+    }
+
+    .b-useful_card .vote:hover:not(:disabled) {
+        border-color: currentColor !important;
+    }
+
+    .b-useful_card .action.edit:hover {
+        background: rgb(var(--accent)) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+
+    .b-useful_card .action.delete:hover {
+        background: rgb(var(--red)) !important;
+        color: rgb(var(--text-strong)) !important;
+    }
+}
