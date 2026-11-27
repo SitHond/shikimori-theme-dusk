@@ -1,4 +1,4 @@
-/* shiki dusk v0.3.2 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
+/* shiki dusk v0.3.3 — тема и обновления: https://github.com/SitHond/shikimori-theme-dusk */
 /* ===== tokens/palette =====
    палитра темы: исходные цвета (rgb-тройки без rgb()) и родные переменные шикимори.
    свои цвета задаются в site.css внутри той же обёртки @media … { html:root { … } },
@@ -1185,6 +1185,42 @@
         border-color: rgba(var(--accent-2), .23) !important;
     }
 
+    /* блочный спойлер [spoiler_block]: заголовок и содержимое (у сайта #678 и светлый #f3f5f7) */
+    .b-spoiler_block > span {
+        background-color: color-mix(in srgb, rgb(var(--accent)) 28%, rgb(var(--panel))) !important;
+        color: rgb(var(--lilac)) !important;
+        border-radius: var(--plate-radius);
+    }
+
+    .b-spoiler_block > span:active {
+        background-color: var(--btn-bg-active) !important;
+    }
+
+    .b-spoiler_block > span[disabled],
+    .b-spoiler_block > span.disabled {
+        background-color: rgb(var(--surface)) !important;
+        color: rgb(var(--text-3)) !important;
+    }
+
+    .b-spoiler_block > div {
+        background-color: rgba(var(--accent), .06) !important;
+        color: rgb(var(--text-2)) !important;
+        border-left-color: color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--bg))) !important;
+    }
+
+    /* строчный спойлер */
+    .b-spoiler_inline:not(.is-opened) {
+        background-color: color-mix(in srgb, rgb(var(--accent)) 30%, rgb(var(--panel))) !important;
+    }
+
+    .b-spoiler_inline:not(.is-opened) > span :is(span, div, code) {
+        border-color: rgb(var(--panel)) !important;
+    }
+
+    .b-spoiler_inline.is-opened {
+        background-color: rgba(var(--accent), .12) !important;
+    }
+
     /* цитаты и код */
     .b-quote,
     .b-quote-v2,
@@ -1221,6 +1257,15 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+    .b-spoiler_block > span:hover {
+        background-color: var(--btn-bg-hover) !important;
+        color: rgb(var(--warm-2)) !important;
+    }
+
+    .b-spoiler_inline:not(.is-opened):hover {
+        background-color: color-mix(in srgb, rgb(var(--accent)) 40%, rgb(var(--panel))) !important;
+    }
+
     .b-shiki_editor .controls a:hover,
     .editor-controls > span:hover {
         color: rgb(var(--warm)) !important;
@@ -2490,7 +2535,7 @@
 @media screen and (min-width: 1px) {
     :root {
         --theme-name: "shiki dusk";
-        --theme-version: "0.3.2";
+        --theme-version: "0.3.3";
     }
 
     .l-footer {
